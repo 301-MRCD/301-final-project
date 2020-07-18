@@ -1,8 +1,5 @@
 # 301-final-project
-Partners 
-Davee
-Ryan
-Chris
+Team :  Davee Sok, Ryan Geddes, Chris Bortel, Michelle Salazar
 
 Team Agreement
 https://docs.google.com/document/d/1Y4YqEGetRE68ka0oiSGRjK2Pk6_ijXd8kQBZpq8Xt2s/edit?usp=sharing
