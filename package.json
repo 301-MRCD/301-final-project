@@ -1,0 +1,30 @@
+{
+  "name": "301-final-project",
+  "version": "1.0.0",
+  "description": "Team :  Davee Sok, Ryan Geddes, Chris Bortel, Michelle Salazar",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/301-MRCD/301-final-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/301-MRCD/301-final-project/issues"
+  },
+  "homepage": "https://github.com/301-MRCD/301-final-project#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.3.0",
+    "superagent": "^5.3.1"
+  }
+}
