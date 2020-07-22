@@ -24,7 +24,5 @@ https://docs.google.com/document/d/1cZqaHz-dsTCRPmIejseQbXNF0flnt9bQdDwKWoTsbKM/
 
 **lucid chart**
 
-https://app.lucidchart.com/invitations/accept/a335321c-e59e-4ed0-aea9-60fee5668188
+https://app.lucidchart.com/invitations/accept/2db81489-8ea8-4842-9463-e8f7d825005b
 
-
-https://app.lucidchart.com/documents/edit/4d9a6a4c-32ae-433d-9210-4bb103c884c5/0_0?shared=true
