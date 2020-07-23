@@ -26,7 +26,7 @@ app.use(express.static('./public'));
 // ----------------------------------------------
 
 app.get('/', handleHome);
-app.get('/searchResults', renderResults);
+app.get('/surch', renderResults);
 // app.get('/details', renderDetail)
 // app.post('/add_ratings', addRatings);
 // app.get('/about', renderAbout);
@@ -40,29 +40,54 @@ app.use(handleError);
 // ----------------------------------------------
 
 function handleHome(req,res) {
-let pokeArr = [];
-const API = 'https://pokeapi.co/api/v2/pokemon';
-// console.log(`API call: ${API}`)
-
-superagent.get(API)
-    .then(obj => {
-        obj.body.results.forEach(critter =>{
-        let pokeObj = new Pokemon(critter);
-        pokeArr.push(pokeObj);
-        });
-
-        pokeArr.sort(function(a, b){
-            if(a.name < b.name) { return -1; }
-            if(a.name > b.name) { return 1; }
-            return 0;
-        });
-        // res.status(200).json(pokeArr);
-        res.render('index', {critters: pokeArr});
-    })
+    res.status(200).render('pages/index')
     .catch(error => handleError(error,res));
 }
 
-function renderResults (req,res) {
+function renderResults(req,res) {
+    console.log('this is req +++++++++++++++++', req.query.searchQuery)
+    // res.send(req)
+// let pokeArr = [];
+const API = 'https://api.yelp.com/v3/businesses/search?categories=dog_parks&sort_by=distance&location=98103'
+//const API = `https://api.yelp.com/v3/businesses/search?latitude=${req.query.latitude}&longitude=${req.query.longitude}`
+
+
+let queryObject = {
+    Authorization: `Bearer ${process.env.YELP_API_KEY}`,
+    format: 'json'
+  }
+  let url_params = {
+      'limit': 5,
+      'offset':5
+  }
+superagent.get(API)
+  .set(queryObject)
+  .set(url_params)
+  .then(obj =>{
+    res.status(200).render('pages/results')
+    console.log(obj);
+  })
+// console.log(`API call: ${API}`)
+//res.status(200).render('pages/results')
+// superagent.get(API)
+//     .then(obj => {
+//         obj.body.results.forEach(critter =>{
+//         let pokeObj = new Pokemon(critter);
+//         pokeArr.push(pokeObj);
+//         });
+
+//         pokeArr.sort(function(a, b){
+//             if(a.name < b.name) { return -1; }
+//             if(a.name > b.name) { return 1; }
+//             return 0;
+//         });
+//         // res.status(200).json(pokeArr);
+//         res.render('index', {critters: pokeArr});
+//     })
+    .catch(error => handleError(error,res))
+}
+
+function comebacktome (req,res) {
     console.log(`req.body: ${req.body.name}`);
     let SQL = 'INSERT INTO poketable (name, url) VALUES ($1, $2) RETURNING *;';
 
