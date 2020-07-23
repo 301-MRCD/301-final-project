@@ -7,7 +7,7 @@ const superagent = require('superagent');
 const pg = require('pg');
 const cors = require('cors');
 const morgan = require('morgan');
-const client = new pg.Client(process.env.POSTGRES);
+const client = new pg.Client(process.env.DATABASE_URL);
 const app = express();
 const PORT = process.env.PORT;
 
@@ -25,13 +25,11 @@ app.use(express.static('./public'));
 // Routes
 // ----------------------------------------------
 
-app.get('/', slashHandler);
-app.post('/add',addPokemon);
-app.get('/favorites', handleFavorites)
-// app.get('/searches/new', registerForm);
-// app.post('/searches', postSearchThing);
-// app.get('/books/:id', singleBookHandler);
-
+app.get('/', handleHome);
+app.get('/surch', renderResults);
+// app.get('/details', renderDetail)
+// app.post('/add_ratings', addRatings);
+// app.get('/about', renderAbout);
 
 app.use('*', handleNotFound);
 app.use(handleError);
@@ -41,34 +39,37 @@ app.use(handleError);
 // ROUTE HANDLER FUNCTIONS
 // ----------------------------------------------
 
-function slashHandler (req,res) {
-let pokeArr = [];
-const API = 'https://pokeapi.co/api/v2/pokemon';
-// console.log(`API call: ${API}`)
-
-superagent.get(API)
-    .then(obj => {
-        obj.body.results.forEach(critter =>{
-        let pokeObj = new Pokemon(critter);
-        pokeArr.push(pokeObj);
-        });
-
-        pokeArr.sort(function(a, b){
-            if(a.name < b.name) { return -1; }
-            if(a.name > b.name) { return 1; }
-            return 0;
-        });
-        // res.status(200).json(pokeArr);
-        res.render('show', {critters: pokeArr});
-    })
-    .catch(error => {
-        console.log(`error with slashHandler: ${error}`)
-        res.status(500).send(error);
-
-    });
+function handleHome(req,res) {
+    res.status(200).render('pages/index')
+    .catch(error => handleError(error,res));
 }
 
-function addPokemon (req,res) {
+function renderResults(req,res) {
+
+const searchQuery = req.query.searchQuery;
+const API = `https://api.yelp.com/v3/businesses/search`;
+
+
+let queryObject = {
+ categories: 'dog_parks',
+ sort_by: 'distance',
+ location: searchQuery,
+ limit: 5
+}
+
+superagent.get(API)
+  .set("Authorization", `Bearer ${process.env.YELP_API_KEY}`)
+  .query(queryObject)
+  .then(obj =>{
+    res.status(200).send(obj.body)
+    // res.status(200).render('pages/results')
+    // console.log('obj.body++++++',obj.body);
+  })
+
+    .catch(error => handleError(error,res))
+}
+
+function comebacktome (req,res) {
     console.log(`req.body: ${req.body.name}`);
     let SQL = 'INSERT INTO poketable (name, url) VALUES ($1, $2) RETURNING *;';
 
@@ -102,23 +103,15 @@ function handleFavorites(req, res) {
         );   
 }
 
-
-
-
-
-
-
-
 function handleNotFound(req, res) {
     res.status(404).send('Could Not Find What You Asked For');
 }
   
   // 500 (catastrophic) error handler. Log it, and then tell the user
-function handleError(error, req, res, next) {
+function handleError(error, res) {
     console.error(error);
-    res.status(500).send('Something Bad Happened')
-}
-
+    res.status(500).render('error',{error_data: error})
+} 
 
 
 
@@ -126,9 +119,20 @@ function handleError(error, req, res, next) {
 // CONSTRUCTORS
 // ----------------------------------------------
 
-function Pokemon(obj) {
+function Parks(obj) {
+    this.yelp_id = obj.id;
     this.name = obj.name;
-    this.url = obj.url;
+    this.url = obj.image_url;
+    this.addr = obj.location.display_address;
+    this.lat = obj.coordinates.latitude;
+    this.long = obj.coordinates.longitude;
+
+    this.ratings = '';
+    this.dogsize = '';
+    this.washStation = '';
+    this.trails = '';
+    this.water = '';
+    this.description = '';
 };
 
 
