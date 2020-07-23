@@ -26,10 +26,10 @@ app.use(express.static('./public'));
 // ----------------------------------------------
 
 app.get('/', handleHome);
-app.get('/results',renderResults);
-app.get('/details', renderDetail)
-app.post('/add_ratings', addRatings);
-app.get('/about', renderAbout);
+app.get('/searchResults', renderResults);
+// app.get('/details', renderDetail)
+// app.post('/add_ratings', addRatings);
+// app.get('/about', renderAbout);
 
 app.use('*', handleNotFound);
 app.use(handleError);
@@ -57,16 +57,12 @@ superagent.get(API)
             return 0;
         });
         // res.status(200).json(pokeArr);
-        res.render('show', {critters: pokeArr});
+        res.render('index', {critters: pokeArr});
     })
-    .catch(error => {
-        console.log(`error with slashHandler: ${error}`)
-        res.status(500).send(error);
-
-    });
+    .catch(error => handleError(error,res));
 }
 
-function addPokemon (req,res) {
+function renderResults (req,res) {
     console.log(`req.body: ${req.body.name}`);
     let SQL = 'INSERT INTO poketable (name, url) VALUES ($1, $2) RETURNING *;';
 
@@ -105,11 +101,10 @@ function handleNotFound(req, res) {
 }
   
   // 500 (catastrophic) error handler. Log it, and then tell the user
-function handleError(error, req, res, next) {
+function handleError(error, res) {
     console.error(error);
-    res.status(500).send('Something Bad Happened')
-}
-
+    res.status(500).render('error',{error_data: error})
+} 
 
 
 
