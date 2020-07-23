@@ -25,13 +25,11 @@ app.use(express.static('./public'));
 // Routes
 // ----------------------------------------------
 
-app.get('/', slashHandler);
-app.post('/add',addPokemon);
-app.get('/favorites', handleFavorites)
-// app.get('/searches/new', registerForm);
-// app.post('/searches', postSearchThing);
-// app.get('/books/:id', singleBookHandler);
-
+app.get('/', handleHome);
+app.get('/results',renderResults);
+app.get('/details', renderDetail)
+app.post('/add_ratings', addRatings);
+app.get('/about', renderAbout);
 
 app.use('*', handleNotFound);
 app.use(handleError);
@@ -41,7 +39,7 @@ app.use(handleError);
 // ROUTE HANDLER FUNCTIONS
 // ----------------------------------------------
 
-function slashHandler (req,res) {
+function handleHome(req,res) {
 let pokeArr = [];
 const API = 'https://pokeapi.co/api/v2/pokemon';
 // console.log(`API call: ${API}`)
@@ -102,13 +100,6 @@ function handleFavorites(req, res) {
         );   
 }
 
-
-
-
-
-
-
-
 function handleNotFound(req, res) {
     res.status(404).send('Could Not Find What You Asked For');
 }
@@ -126,9 +117,20 @@ function handleError(error, req, res, next) {
 // CONSTRUCTORS
 // ----------------------------------------------
 
-function Pokemon(obj) {
+function Parks(obj) {
+    this.yelp_id = obj.id;
     this.name = obj.name;
-    this.url = obj.url;
+    this.url = obj.image_url;
+    this.addr = obj.location.display_address;
+    this.lat = obj.coordinates.latitude;
+    this.long = obj.coordinates.longitude;
+
+    this.ratings = '';
+    this.dogsize = '';
+    this.washStation = '';
+    this.trails = '';
+    this.water = '';
+    this.description = '';
 };
 
 
