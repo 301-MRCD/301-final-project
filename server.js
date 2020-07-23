@@ -45,45 +45,27 @@ function handleHome(req,res) {
 }
 
 function renderResults(req,res) {
-    console.log('this is req +++++++++++++++++', req.query.searchQuery)
-    // res.send(req)
-// let pokeArr = [];
-const API = 'https://api.yelp.com/v3/businesses/search?categories=dog_parks&sort_by=distance&location=98103'
-//const API = `https://api.yelp.com/v3/businesses/search?latitude=${req.query.latitude}&longitude=${req.query.longitude}`
+
+const searchQuery = req.query.searchQuery;
+const API = `https://api.yelp.com/v3/businesses/search`;
 
 
 let queryObject = {
-    Authorization: `Bearer ${process.env.YELP_API_KEY}`,
-    format: 'json'
-  }
-  let url_params = {
-      'limit': 5,
-      'offset':5
-  }
-superagent.get(API)
-  .set(queryObject)
-  .set(url_params)
-  .then(obj =>{
-    res.status(200).render('pages/results')
-    console.log(obj);
-  })
-// console.log(`API call: ${API}`)
-//res.status(200).render('pages/results')
-// superagent.get(API)
-//     .then(obj => {
-//         obj.body.results.forEach(critter =>{
-//         let pokeObj = new Pokemon(critter);
-//         pokeArr.push(pokeObj);
-//         });
+ categories: 'dog_parks',
+ sort_by: 'distance',
+ location: searchQuery,
+ limit: 5
+}
 
-//         pokeArr.sort(function(a, b){
-//             if(a.name < b.name) { return -1; }
-//             if(a.name > b.name) { return 1; }
-//             return 0;
-//         });
-//         // res.status(200).json(pokeArr);
-//         res.render('index', {critters: pokeArr});
-//     })
+superagent.get(API)
+  .set("Authorization", `Bearer ${process.env.YELP_API_KEY}`)
+  .query(queryObject)
+  .then(obj =>{
+    res.status(200).send(obj.body)
+    // res.status(200).render('pages/results')
+    // console.log('obj.body++++++',obj.body);
+  })
+
     .catch(error => handleError(error,res))
 }
 
