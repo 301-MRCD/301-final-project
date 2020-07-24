@@ -23,11 +23,10 @@ app.use(express.static('./public'));
 
 // ----------------------------------------------
 // Routes
-// ----------------------------------------------
-
+// ---------------------------------------------
 app.get('/', handleHome);
 app.get('/render_results', renderResults);
-// app.get('/render_details', renderDetail)
+app.post('/render_details', renderDetail)
 // app.post('/add_ratings', addRatings);
 // app.get('/render_about', renderAbout);
 
@@ -45,10 +44,8 @@ function handleHome(req,res) {
 }
 
 function renderResults(req,res) {
-
   const searchQuery = req.query.searchQuery;
   const API = `https://api.yelp.com/v3/businesses/search`;
-
 
   let queryObject = {
     categories: 'dog_parks',
@@ -61,12 +58,17 @@ function renderResults(req,res) {
     .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
     .query(queryObject)
     .then(obj =>{
-      res.status(200).send(obj.body);
-    // res.status(200).render('pages/results')
-    // console.log('obj.body++++++',obj.body);
+      let apiData = obj.body.businesses.map(park => new Park(park));
+      res.status(200).render('pages/results', {parkArr:apiData})
     })
 
     .catch(error => handleError(error,res));
+}
+
+function renderDetail(req,res){
+  console.log('this is req params ++++++++++++++++++++++++++++++++++++++++', req.body)
+  res.status(200).render('pages/details',{detailObj:req.body})
+
 }
 
 function comebacktome (req,res) {
@@ -119,11 +121,11 @@ function handleError(error, res) {
 // CONSTRUCTORS
 // ----------------------------------------------
 
-function Parks(obj) {
+function Park(obj) {
   this.yelp_id = obj.id;
   this.name = obj.name;
-  this.url = obj.image_url;
-  this.addr = obj.location.display_address;
+  this.image_url = obj.image_url;
+  this.address = obj.location.display_address;
   this.lat = obj.coordinates.latitude;
   this.long = obj.coordinates.longitude;
 
