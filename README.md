@@ -4,8 +4,6 @@ Team :  Davee Sok, Ryan Geddes, Chris Bortel, Michelle Salazar
 **Heroku app**
 https://mister-cd-301-final.herokuapp.com/
 
-**User Story:** As a dog owner, I want to be able to find a list of dog parks in the seattle area.  I’d like to be able to filter these parks by different criteria such as dog size, terrain (i.e. beach, forest) off-leash, and other useful criteria.  I also want to be able to find nearby dog-friendly businesses I can take my dogs to on doggy dates after the park!  I would also like to be able to save a list of my favorite parks and be able to reference them later.  
-
 **Team Agreement**
 https://docs.google.com/document/d/1Y4YqEGetRE68ka0oiSGRjK2Pk6_ijXd8kQBZpq8Xt2s/edit?usp=sharing
 
@@ -39,7 +37,9 @@ https://app.lucidchart.com/invitations/accept/2db81489-8ea8-4842-9463-e8f7d82500
 **Version**: 1.0.2 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
-For our final project 
+Our final project for codefellows 301 
+
+**User Story:** As a dog owner, I want to be able to find a list of dog parks in the seattle area.  I’d like to be able to filter these parks by different criteria such as dog size, terrain (i.e. beach, forest) off-leash, and other useful criteria.  I also want to be able to find nearby dog-friendly businesses I can take my dogs to on doggy dates after the park!  I would also like to be able to save a list of my favorite parks and be able to reference them later.  
 
 ## Getting Started
 Build the wireframe, connect to the api, send and post the data via full stack app to ejs, render it.
@@ -48,41 +48,48 @@ Build the wireframe, connect to the api, send and post the data via full stack a
 express, superagent, cors, ejs, morgan, pg.
 
 ## Change Log
-07-09-2020 9:45pm - Application main structure now has a fully-functional express server, with GET and POST routes for the book resource.
+07-22-2020 9:45pm - Application main structure now has a fully-functional express server, with functioning file scaffolding and rendering basic Yelp API calls.
 
+07-23-2020 9:23pm - Application now has functional render details page that displays basic park info upon click from user.1cZqaHz
+
+
+07-23-2020 9:45pm - Application 
 
 ## Credits and Collaborations
 John Cokos - Lead Instructor
 Ray Ruazol - Assistant Instructor
-Michelle Salazar - Student A/Soft. Dev./Author A
-Enoch Strok - Student B/Soft. Dev./Author B
-Ryan Geddes - Student /Soft. Dev.: Shared ternary operator code for fixing error in object data constructor. 'this.isbn = ((obj.volumeInfo.industryIdentifiers) ? obj.volumeInfo.industryIdentifiers : 'no isbn') || 'error no isbn';'
+Michelle Salazar - Student /Soft. Dev./Author M
+Ryan Geddes - Student /Soft. Dev./Author R
+Christoper Bortell - Student /Soft. Dev./Author C
+Davee Sok - Student /Soft. Dev./Author D
+Enoch Strok - Student /Soft. Dev.: shared Readme formatting.
 
 
 ## Features History ##
-**Number and name of feature:** lab_11
-**Estimate of time needed to complete:** 1:00
-**Start time:** 5:00pm
+**Number and name of feature:** api_db
+**Estimate of time needed to complete:** 2:30
+**Start time:** 7:30pm 7/23/2020
+**Finish time:**9:22 pm 7/23/2020
+**Actual time needed to complete:**
+**Notes:** Last night we set up the basic scaffolding for our site and made sure all the routes were semantically named and wired up correctly.  Tested a basic yelp API call and confirmed proof of life.  Goal for today was to get our results page rendered with accurate JSON data from the Yelp API as well as details.
+
+**Number and name of feature:** 
+**Estimate of time needed to complete:** 
+**Start time:** 
+**Finish time:** 
+**Actual time needed to complete:** 
+**Notes:** 
+
+**Number and name of feature:** 
+**Estimate of time needed to complete:** 
+**Start time:** 
 **Finish time:**
 **Actual time needed to complete:**
+**Notes:** 
 
-**Number and name of feature:** lab_11: Item#3 in Trello
-**Estimate of time needed to complete:** Undefined.
-**Start time:** 6:20PM 07/11/2020
-**Finish time:** 11:28PM 07/11/2020
-**Actual time needed to complete:** 5 hours 8 minutes
-**Notes:** We got ALOT accomplished today!
-
-**Number and name of feature:** lab_11: Item#3,4,6 in Trello
-**Estimate of time needed to complete:** Undefined.
-**Start time:** 8:00PM 07/12/2020
-**Finish time:** 5:48AM 07/13/2020
-**Actual time needed to complete:** 9 hours 48 minutes!!!!
-**Notes:** App is complete! Except the CSS!
-
-**Number and name of feature:** lab_12: Item#1in Trello
-**Estimate of time needed to complete:** 8-12 Hours.
-**Start time:** 9:30PM 07/13/2020
+**Number and name of feature:** 
+**Estimate of time needed to complete:** 
+**Start time:** 
 **Finish time:** 
 **Actual time needed to complete:**
 **Notes:** We will be: 
