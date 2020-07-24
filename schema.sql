@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS poketable;
+DROP TABLE IF EXISTS parks;
 
-CREATE TABLE poketable(
+CREATE TABLE parks(
     id SERIAL PRIMARY KEY,
     name VARCHAR (255),
     url VARCHAR (255)
