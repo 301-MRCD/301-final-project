@@ -6,6 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>im am results</h1>
+    <h1>Your search results</h1>
+    <div>
+        <ul>
+            <% for(var park of parkArr){ %>
+            <img src="<%= park.image_url %>" width="200px" >
+            <li> <%= park.name %> </li>
+            <li> <%= park.address %> </li>
+        </ul>
+        <form method="post" action="/render_details"> 
+            <input type="hidden" name="image_url" value="<%= park.image_url %>">
+            <input type="hidden" name="name" value="<%= park.name %>">
+            <input type="hidden" name="address" value="<%= park.address %>">
+            <button type="submit">Submit</button>
+        </form>
+        <%} %>
+    </div>
 </body>
 </html>
