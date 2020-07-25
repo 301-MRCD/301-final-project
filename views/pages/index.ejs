@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/styles.css">
-    <title>Document</title>
+    <%- include ( '../layout/head' ) %>
 </head>
 <body>
+    <header>
+        <%- include ( '../layout/head' ) %>
+    </header>
     <h1>HELLO WORLD I AM WORKING I AM INDEX.EJS</h1>
-    <form method="get" action="/render_results">
-        <fieldset>
-        <input type="text" placeholder="zipcode" name="searchQuery" required></input>
-        <button type="submit">Search</button>
-        </fieldset>
-    </form>
-
+    <div>
+        <form method="get" action="/render_results">
+            <fieldset>
+                <input type="text" placeholder="zipcode" name="searchQuery" required></input>
+                <button type="submit">Search</button>
+            </fieldset>
+        </form>
+    </div>
+        
 </body>
 </html>
