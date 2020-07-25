@@ -71,13 +71,37 @@ function renderDetail(req,res){
   let values = [req.body.yelp_id];
   client.query(SQL, values)
     .then (results => {
-      res.status(200).send(results)
+      console.log('this is results.rowcount from line 74 ++++++++++++++++++++++', results.rowCount)
+      if (results.rowCount === 0 ){
+        createParkRating(values)
+      }
+      
+      else { console.log('')
+        console.log('data exits in the db +++++++++++++++++++++++++++++++', results)
+        res.status(200).send(results)
+      
+      }
+
+        //createPark function in db
+        //then render newly created park rating on page with zero ratings
+      //else:
+        //render first rating
+      // res.status(200).send(results)
     })
     .catch(error => handleError(error,res));
   //if park exists return and render rating to page
   //if park does not exist create park in database and then render to page
   // res.status(200).render('pages/details',{detailObj:req.body})
 
+}
+function createParkRating (yelp_id){
+  let SQL = `INSERT INTO parks_table (yelp_id, total_ratings, total_votes)  VALUES ($1, $2, $3 ) RETURNING *;`
+  let safequery = [yelp_id, 0 , 0]
+  client.query(SQL, safequery)
+    .then (results =>{
+      console.log('this is results from create park rating +++++++++++++++++', results)
+    })
+    .catch(error => handleError(error,res));
 }
 
 function addRatings(req,res){
@@ -132,29 +156,26 @@ function handleError(error, res) {
   res.status(500).render('error',{error_data: error});
 }
 
-
-
 // ----------------------------------------------
 // CONSTRUCTORS
 // ----------------------------------------------
 
 function Park(obj) {
+  //api data
   this.yelp_id = obj.id;
   this.name = obj.name;
   this.image_url = obj.image_url;
   this.address = obj.location.display_address;
   this.lat = obj.coordinates.latitude;
   this.long = obj.coordinates.longitude;
-
-  this.ratings = '';
-  this.dogsize = '';
-  this.washStation = '';
-  this.trails = '';
-  this.water = '';
-  this.description = '';
+  // //db data
+  // this.ratings = '';
+  // this.dogsize = '';
+  // this.washStation = '';
+  // this.trails = '';
+  // this.water = '';
+  // this.description = '';
 }
-
-
 // ----------------------------------------------
 // CONNECT
 // ----------------------------------------------
