@@ -65,47 +65,37 @@ function renderResults(req,res) {
 }
 
 function renderDetail(req,res){
-  console.log('this is req body ++++++++++++++++++++++++++++++++++++++++', req.body)
-  //search database for park id
   let SQL = `SELECT * FROM parks_table WHERE yelp_id=$1`;
   let values = [req.body.yelp_id];
   client.query(SQL, values)
     .then (results => {
-      console.log('this is results.rowcount from line 74 ++++++++++++++++++++++', results.rowCount)
       if (results.rowCount === 0 ){
-        createParkRating(values)
+        createParkRating(req.body.yelp_id, res)
+        results.status(200).render('pages/detail')
       }
-      
-      else { console.log('')
-        console.log('data exits in the db +++++++++++++++++++++++++++++++', results)
+      else {
+        // render existing rating 
         res.status(200).send(results)
       
       }
 
-        //createPark function in db
-        //then render newly created park rating on page with zero ratings
-      //else:
-        //render first rating
-      // res.status(200).send(results)
     })
     .catch(error => handleError(error,res));
-  //if park exists return and render rating to page
-  //if park does not exist create park in database and then render to page
-  // res.status(200).render('pages/details',{detailObj:req.body})
 
 }
-function createParkRating (yelp_id){
+
+
+function createParkRating (yelp_id, res){
   let SQL = `INSERT INTO parks_table (yelp_id, total_ratings, total_votes)  VALUES ($1, $2, $3 ) RETURNING *;`
   let safequery = [yelp_id, 0 , 0]
   client.query(SQL, safequery)
     .then (results =>{
-      console.log('this is results from create park rating +++++++++++++++++', results)
+      res.status(200).render('/')
     })
     .catch(error => handleError(error,res));
 }
 
 function addRatings(req,res){
-  console.log('results from form +++++++++++++++++++++++++++++++++++++++++', req.body)
 
   //on submit of rating send users rating to database and increment # of ratings by 1
   //pull update park rating and render to page

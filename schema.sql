@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS parks;
 DROP TABLE IF EXISTS parks_table;
 
 CREATE TABLE parks_table(
