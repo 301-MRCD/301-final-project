@@ -26,7 +26,7 @@ app.use(express.static('./public'));
 // ---------------------------------------------
 app.get('/', handleHome);
 app.get('/render_results', renderResults);
-app.post('/render_details', renderDetail)
+app.post('/render_details', renderDetail);
 // app.post('/add_ratings', addRatings);
 // app.get('/render_about', renderAbout);
 
