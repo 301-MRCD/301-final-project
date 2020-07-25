@@ -1,26 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+ <%- include ( '../layout/head' ) %>
 </head>
 <body>
+    <header>
+        <%- include ( '../layout/head' ) %>
+    </header>
     <h1>Your search results</h1>
-    <div>
-        <ul>
+   <main>
+        <div class="search-container">
+            <form method="get" action="/render_results">
+                <fieldset>
+                <input type="text" placeholder="zipcode" name="searchQuery" required></input>
+                <button type="submit">Search</button>
+                </fieldset>
+            </form>
+        </div>
+       
+        <div class="map-container">
+            <a href="https://placeholder.com"> 
+            <img src="https://via.placeholder.com/200?text=map" alt="">
+            </a>
+        </div>
+    
+        <section>
             <% for(var park of parkArr){ %>
-            <img src="<%= park.image_url %>" width="200px" >
-            <li> <%= park.name %> </li>
-            <li> <%= park.address %> </li>
-        </ul>
-        <form method="post" action="/render_details"> 
-            <input type="hidden" name="image_url" value="<%= park.image_url %>">
-            <input type="hidden" name="name" value="<%= park.name %>">
-            <input type="hidden" name="address" value="<%= park.address %>">
-            <button type="submit">Submit</button>
-        </form>
-        <%} %>
-    </div>
-</body>
+                <div class="result-card">
+                    <img src="<%= park.image_url %>" width="200px" >
+                    <h2> <%= park.name %> </h2>
+                    <p> <%= park.address %> </p>
+                    <form method="post" action="/render_details"> 
+                        <input type="hidden" name="image_url" value="<%= park.image_url %>">
+                        <input type="hidden" name="name" value="<%= park.name %>">
+                        <input type="hidden" name="address" value="<%= park.address %>">
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            <%} %>
+        </section>
+            
+        
+    </main>
+    </body>
 </html>
