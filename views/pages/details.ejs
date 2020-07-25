@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <%- include ( '../layout/head' ) %>
 </head>
 <body>
-    <h1>im am details</h1>
-    <div>
-        <img src="<%= detailObj.image_url%>" width="200px">
-        <li> <%= detailObj.name %> </li>
-        <li> <%= detailObj.address %> </li>
-    </div>
+<header> 
+    <%- include ( '../layout/header' ) %>
+</header>
+<main>
+
+    <section>
+        <div>
+            <img src="<%= detailObj.image_url%>" width="200px">
+        </div>
+        <div>
+            <h2> <%= detailObj.name %> </h2>
+            <p> <%= detailObj.address %> </p>
+            <button>Add your thoughts</button>
+        </div>
+        
+        <article>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ipsam facere quibusdam! Officia quod earum voluptatibus temporibus laudantium ullam deserunt. Vero necessitatibus harum excepturi illo eum voluptatibus commodi dolore provident.</p>
+        </article>
+
+        <div>
+            <h3>Nearby dog friendly locations</h3>
+            <button>Grub</button>
+            <button>Grooming</button>
+            <button>Pet Stores</button>
+        </div>
+        
+        
+    </section>
+</main>
 </body>
 </html>
