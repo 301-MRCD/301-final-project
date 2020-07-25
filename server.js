@@ -1,7 +1,9 @@
 'use strict';
-
+// ----------------------------------------------
+// LIBRARIES AND DECLARATIONS
+// ----------------------------------------------
 require('dotenv').config();
-// stuff
+
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
@@ -10,29 +12,26 @@ const morgan = require('morgan');
 const client = new pg.Client(process.env.DATABASE_URL);
 const app = express();
 const PORT = process.env.PORT;
+const override = require('method-override');
 
 app.set('view engine','ejs');
-
 app.use(cors());
-
 app.use(morgan('dev'));
-
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.static('./public'));
+app.use(override('_method'));
 
 // ----------------------------------------------
-// Routes
+// ROUTES
 // ---------------------------------------------
 app.get('/', handleHome);
 app.get('/render_results', renderResults);
 app.post('/render_details', renderDetail);
-// app.post('/add_ratings', addRatings);
+app.post('/add_ratings', addRatings);
 // app.get('/render_about', renderAbout);
 
 app.use('*', handleNotFound);
 app.use(handleError);
-
 
 // ----------------------------------------------
 // ROUTE HANDLER FUNCTIONS
@@ -67,8 +66,19 @@ function renderResults(req,res) {
 
 function renderDetail(req,res){
   console.log('this is req params ++++++++++++++++++++++++++++++++++++++++', req.body)
+  //search database for park id
+  //if park exists return and render rating to page
+  //if park does not exist create park in database and then render to page
   res.status(200).render('pages/details',{detailObj:req.body})
 
+}
+
+function addRatings(req,res){
+  console.log('results from form +++++++++++++++++++++++++++++++++++++++++', req.body)
+
+  //on submit of rating send users rating to database and increment # of ratings by 1
+  //pull update park rating and render to page
+  
 }
 
 function comebacktome (req,res) {
@@ -91,7 +101,7 @@ function comebacktome (req,res) {
 function handleFavorites(req, res) {
 
   //create query
-  const SQL = 'SELECT * from poketable';
+  const SQL = 'SELECT * from parks';
 
   //give our SQL query to our pg 'agent'
   client.query(SQL)

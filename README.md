@@ -1,6 +1,14 @@
 # 301-final-project
 Team :  Davee Sok, Ryan Geddes, Chris Bortel, Michelle Salazar
 
+**SCRATCH BOARD**
+
+Links we may need to come back to:
+Dog Friendly Restaurant API links:
+https://docs.developer.yelp.com/reference#business-update
+https://www.yelp.com/search?find_desc=Dog+Friendly+Restaurants&find_loc=Seattle%2C+WA
+
+
 **Heroku app**
 https://mister-cd-301-final.herokuapp.com/
 

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/6338afea35.js" crossorigin="anonymous"></script>
+
 <head>
     <%- include ( '../layout/head' ) %>
 </head>
@@ -16,7 +19,13 @@
         <div>
             <h2> <%= detailObj.name %> </h2>
             <p> <%= detailObj.address %> </p>
-            <button>Add your thoughts</button>
+            <form method="post" action="/add_ratings?_method=post">
+                <input type="number" name="rating" placeholder="0-5">
+                <input type="hidden" name="yelp_id" value="<%= detailObj.yelp_id %>">
+                <button type="submit">Rate it</button>
+                <i class="fas fa-paw"></i>
+            </form>
+                
         </div>
         
         <article>

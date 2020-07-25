@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS parks;
 
 CREATE TABLE parks(
     id SERIAL PRIMARY KEY,
-    name VARCHAR (255),
-    url VARCHAR (255)
+    yelp_id VARCHAR (255),
+    total_ratings VARCHAR (255),
+    total_votes VARCHAR(255)
 );
