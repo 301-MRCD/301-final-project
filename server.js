@@ -65,11 +65,18 @@ function renderResults(req,res) {
 }
 
 function renderDetail(req,res){
-  console.log('this is req params ++++++++++++++++++++++++++++++++++++++++', req.body)
+  console.log('this is req body ++++++++++++++++++++++++++++++++++++++++', req.body)
   //search database for park id
+  let SQL = `SELECT * FROM parks_table WHERE yelp_id=$1`;
+  let values = [req.body.yelp_id];
+  client.query(SQL, values)
+    .then (results => {
+      res.status(200).send(results)
+    })
+    .catch(error => handleError(error,res));
   //if park exists return and render rating to page
   //if park does not exist create park in database and then render to page
-  res.status(200).render('pages/details',{detailObj:req.body})
+  // res.status(200).render('pages/details',{detailObj:req.body})
 
 }
 
