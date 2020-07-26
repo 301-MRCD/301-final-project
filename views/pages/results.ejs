@@ -5,12 +5,12 @@
 </head>
 <body>
     <header>
-        <%- include ( '../layout/head' ) %>
+        <%- include ( '../layout/header' ) %>
     </header>
     <h1>Your search results</h1>
    <main>
         <div class="search-container">
-            <form method="get" action="/render_results">
+            <form method="get" action="/render-results">
                 <fieldset>
                 <input type="text" placeholder="zipcode" name="searchQuery" required></input>
                 <button type="submit">Search</button>
@@ -24,13 +24,13 @@
             </a>
         </div>
     
-        <section>
+        <section class="results-section">
             <% for(var park of parkArr){ %>
                 <div class="result-card">
                     <img src="<%= park.image_url %>" width="200px" >
                     <h2> <%= park.name %> </h2>
                     <p> <%= park.address %> </p>
-                    <form method="post" action="/render_details"> 
+                    <form class="location-form" method="post" action="/render-details"> 
                         <input type="hidden" name="image_url" value="<%= park.image_url %>">
                         <input type="hidden" name="name" value="<%= park.name %>">
                         <input type="hidden" name="address" value="<%= park.address %>">

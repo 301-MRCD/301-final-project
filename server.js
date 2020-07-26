@@ -25,9 +25,9 @@ app.use(override('_method'));
 // ROUTES
 // ---------------------------------------------
 app.get('/', handleHome);
-app.get('/render_results', renderResults);
-app.post('/render_details', renderDetail);
-app.post('/add_ratings', addRatings);
+app.get('/render-results', renderResults);
+app.post('/render-details', renderDetail);
+app.post('/add-ratings', addRatings);
 // app.get('/render_about', renderAbout);
 
 app.use('*', handleNotFound);
@@ -52,7 +52,7 @@ function renderResults(req, res) {
     categories: 'dog_parks',
     sort_by: 'distance',
     location: searchQuery,
-    limit: 5,
+    limit: 20,
   };
 
   superagent
@@ -75,16 +75,11 @@ function renderDetail(req, res) {
     .query(SQL, values)
     .then((results) => {
       if (results.rowCount === 0) {
-        console.log(
-          'results from line 74++++++++++++++++++++++++++++++',
-          results
-        );
         createParkRating(req.body.yelp_id, req.body.name, res, req.body.image_url, req.body.address);
       } else {
         // render existing rating
 
         let average =results.rows[0].total_ratings / results.rows[0].total_votes || 0;
-        console.log('I am average 94+++++++++++++++++', average);
         res
           .status(200)
           .render('pages/details', {
@@ -101,7 +96,6 @@ function renderDetail(req, res) {
 }
 
 function createParkRating(yelp_id, park_name, res, imageurl, address) {
-  console.log('I am image url line 100+++++++++++++++++++',imageurl)
   let SQL = `INSERT INTO parks_table (yelp_id, park_name, total_ratings, total_votes)  VALUES ($1, $2, $3, $4) RETURNING *;`;
   let safequery = [yelp_id, park_name, 0, 0];
   client
@@ -127,6 +121,14 @@ function createParkRating(yelp_id, park_name, res, imageurl, address) {
 function addRatings(req, res) {
   //on submit of rating send users rating to database and increment # of ratings by 1
   //pull update park rating and render to page
+
+  // need a sql statement
+  // select statement
+  // let SQL = `SELECT total_ratings total_votes FROM parks_table WHERE yelp_id = $1 `;
+  
+  // upadate statement
+  console.log('this is info from the add rating form +++++++++++++++++++++', req.body);
+  res.status(200).send(req.body);
 }
 
 function handleNotFound(req, res) {

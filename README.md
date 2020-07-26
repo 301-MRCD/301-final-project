@@ -169,11 +169,5 @@ Result: Object of results. Successful!
 
 
 
-      <h2> <%= name %> </h2>
-            <p> <%= address %> </p>
-            <form method="post" action="/add_ratings?_method=post">
-                <input type="number" name="rating" placeholder="0-5">
-                <input type="hidden" name="yelp_id" value="<%= yelp_id %>">
-                <button type="submit">Rate it</button>
-                <i class="fas fa-paw"></i>
-            </form> 
+   
+        

@@ -1,0 +1,40 @@
+header {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.nav-ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.search-container {
+  border: 1px solid black;
+}
+
+
+
+
+/* Results */
+
+.results-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.result-card {
+
+  background-color: azure;
+  width: 9.37rem;
+  font-size: .5em;
+  margin-top: 1rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+
+.result-card img {
+  width: 9.37rem;
+  max-height: 9.37rem;
+}

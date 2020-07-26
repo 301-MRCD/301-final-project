@@ -1,51 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/6338afea35.js" crossorigin="anonymous"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <script
+    src="https://kit.fontawesome.com/6338afea35.js"
+    crossorigin="anonymous"
+  ></script>
 
-<head>
+  <head>
     <%- include ( '../layout/head' ) %>
-</head>
-<body>
-<header> 
-    <%- include ( '../layout/header' ) %>
-</header>
-<main>
-<div>
-    <h1> <%= ratings.total_ratings %></h1>
-    <h1> <%= ratings.total_votes %></h1>
-    <h1> <%= average1 %></h1>
-</div>
-    <section>
-       
-        
-        
+  </head>
+  <body>
+    <main>
+      <header>
+        <%- include ( '../layout/header' ) %>
+      </header>
+      <div>
+        <h1><%= ratings.total_ratings %></h1>
+        <h1><%= ratings.total_votes %></h1>
+        <h1><%= average1 %></h1>
+      </div>
+      <section>
         <div>
-
-            <img src="<%= image_url%>" width="200px">
-            <h2> <%= name %> </h2>
-            <p> <%= address %> </p>
-            <form method="post" action="/add_ratings?_method=post">
-                <input type="number" name="rating" placeholder="0-5">
-                <input type="hidden" name="yelp_id" value="<%= yelp_id %>">
-                <button type="submit">Rate it</button>
-                <i class="fas fa-paw"></i>
-            </form> 
+          <img src="<%= image_url%>" width="200px" />
+          <h2><%= name %></h2>
+          <p><%= address %></p>
+          <form method="post" action="/add-ratings">
+            <input type="number" name="rating" placeholder="0-5" />
+            <input type="hidden" name="total_ratings" value="<%= ratings.total_ratings %>" />
+            <input type="hidden" name="total_votes"value="<%= ratings.total_votes %>" />
+            <input type="hidden" name="yelp_id" value="<%= yelp_id %>" />
+            <button type="submit">Rate it</button>
+            <i class="fas fa-paw"></i>
+          </form>
         </div>
 
         <article>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ipsam facere quibusdam! Officia quod earum voluptatibus temporibus laudantium ullam deserunt. Vero necessitatibus harum excepturi illo eum voluptatibus commodi dolore provident.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
+            ipsam facere quibusdam! Officia quod earum voluptatibus temporibus
+            laudantium ullam deserunt. Vero necessitatibus harum excepturi illo
+            eum voluptatibus commodi dolore provident.
+          </p>
         </article>
 
         <div>
-            <h3>Nearby dog friendly locations</h3>
-            <button>Grub</button>
-            <button>Grooming</button>
-            <button>Pet Stores</button>
+          <h3>Nearby dog friendly locations</h3>
+          <button>Grub</button>
+          <button>Grooming</button>
+          <button>Pet Stores</button>
         </div>
-        
-        
-    </section>
-</main>
-</body>
+      </section>
+    </main>
+  </body>
 </html>

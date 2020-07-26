@@ -3,11 +3,3 @@
 @import 'layout.css';
 @import 'modules.css';
 
-.checked {
-    color: orange;
-  }
-
-div {
-  border: solid 1px blue;
-  margin: 20px;
-}
