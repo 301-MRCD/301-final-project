@@ -63,7 +63,6 @@ function renderResults(req, res) {
       let apiData = obj.body.businesses.map(park => new Park(park));
       res.status(200).render('pages/results', { parkArr: apiData });
     })
-
     .catch(error => handleError(error, res));
 }
 
@@ -139,25 +138,76 @@ function addRatings(req, res) {
 
 function makeMultipleAPIcalls(location) {
   let API1 = 'https://api.yelp.com/v3/businesses/search';
-  let queryObj1 = {
+
+  let queryFoodTruck = {
     term: 'food truck',
     category: 'restaurant',
     location: location,
     sort_by: 'distance',
-    limit: 5,
+    limit: 5
   };
+
+  let queryGroomers = {
+    term: 'groomers',
+    category: 'petservices,All',
+    location: location,
+    sort_by: 'distance',
+    limit: 5
+  };
+
+  let queryVets = {
+    term: 'veterinarians',
+    category: 'vet,All',
+    location: location,
+    sort_by: 'distance',
+    limit: 5
+  };
+
+  let queryDogDayCare = {
+    term: 'dog daycare',
+    category: 'petservices,All',
+    location: location,
+    sort_by: 'distance',
+    limit: 5
+  };
+
 
   return superagent
     .get(API1)
     .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
-    .query(queryObj1)
+    .query(queryFoodTruck)
     .then(apiData1 => {
-      console.log('This is apiData1.body.businesses from line 107+++++++++++', apiData1.body.businesses);
-      let foodTruckArr = apiData1.body.businesses.map(truck => new FoodTrucks(truck));
-      console.log('This is foodTruckArr from line 154+++++++++++++++++++++++', foodTruckArr);
-      return foodTruckArr;
+      return superagent
+        .get(API1)
+        .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
+        .query(queryGroomers)
+        .then(apiData2 => {
+          return superagent
+            .get(API1)
+            .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
+            .query(queryVets)
+            .then(apiData3 => {
+              return superagent
+                .get(API1)
+                .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
+                .query(queryDogDayCare)
+                .then(apiData4 => {
+                  let foodTruckArr = apiData1.body.businesses.map(truck => new FoodTrucks(truck));
+                  let groomersArr = apiData2.body.businesses.map(groomer => new Groomers(groomer));
+                  let vetsArr = apiData3.body.businesses.map(vet => new Vets(vet));
+                  let dogDayCareArr = apiData4.body.businesses.map(dayCare => new DogDayCare(dayCare));
+                  return {foodtruck1: foodTruckArr,
+                    groomer1: groomersArr,
+                    vets1: vetsArr,
+                    dogDayCare1: dogDayCareArr
+                  };
+                });
+            });
+        });
     });
 }
+
+
 
 function FoodTrucks(obj) {
   this.food_truck_name = obj.name;
@@ -231,7 +281,4 @@ client
   .connect()
   .then(() => {
     app.listen(PORT, () => console.log('server running on port', PORT));
-  })
-  .catch(err => {
-    throw `PG startuperror: ${err.message}`;
   });
