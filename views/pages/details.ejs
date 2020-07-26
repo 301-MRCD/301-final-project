@@ -19,6 +19,20 @@
     <section>
        
         
+        
+        <div>
+
+            <img src="<%= image_url%>" width="200px">
+            <h2> <%= name %> </h2>
+            <p> <%= address %> </p>
+            <form method="post" action="/add_ratings?_method=post">
+                <input type="number" name="rating" placeholder="0-5">
+                <input type="hidden" name="yelp_id" value="<%= yelp_id %>">
+                <button type="submit">Rate it</button>
+                <i class="fas fa-paw"></i>
+            </form> 
+        </div>
+
         <article>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ipsam facere quibusdam! Officia quod earum voluptatibus temporibus laudantium ullam deserunt. Vero necessitatibus harum excepturi illo eum voluptatibus commodi dolore provident.</p>
         </article>

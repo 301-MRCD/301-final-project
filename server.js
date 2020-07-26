@@ -79,7 +79,7 @@ function renderDetail(req, res) {
           'results from line 74++++++++++++++++++++++++++++++',
           results
         );
-        createParkRating(req.body.yelp_id, req.body.name, res);
+        createParkRating(req.body.yelp_id, req.body.name, res, req.body.image_url, req.body.address);
       } else {
         // render existing rating
 
@@ -90,13 +90,16 @@ function renderDetail(req, res) {
           .render('pages/details', {
             ratings: results.rows[0],
             average1: average,
+            image_url: req.body.image_url,
+            name: req.body.name
           });
       }
     })
     .catch((error) => handleError(error, res));
 }
 
-function createParkRating(yelp_id, park_name, res) {
+function createParkRating(yelp_id, park_name, res, imageurl, address) {
+  console.log('I am image url line 100+++++++++++++++++++',imageurl)
   let SQL = `INSERT INTO parks_table (yelp_id, park_name, total_ratings, total_votes)  VALUES ($1, $2, $3, $4) RETURNING *;`;
   let safequery = [yelp_id, park_name, 0, 0];
   client
@@ -109,7 +112,11 @@ function createParkRating(yelp_id, park_name, res) {
         results.rows[0].total_ratings / results.rows[0].total_votes || 0;
       res.status(200).render('pages/details', {
         ratings: results.rows[0],
-        average1: average
+        average1: average,
+        image_url: imageurl,
+        name: park_name,
+        yelp_id: yelp_id,
+        address: address
       });
     })
     .catch((error) => handleError(error, res));
