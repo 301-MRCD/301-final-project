@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/6338afea35.js" crossorigin="anonymous"></script>
+
 <head>
     <%- include ( '../layout/head' ) %>
 </head>
@@ -8,16 +11,13 @@
     <%- include ( '../layout/header' ) %>
 </header>
 <main>
-
+<div>
+    <h1> <%= ratings.total_ratings %></h1>
+    <h1> <%= ratings.total_votes %></h1>
+    <h1> <%= average1 %></h1>
+</div>
     <section>
-        <div>
-            <img src="<%= detailObj.image_url%>" width="200px">
-        </div>
-        <div>
-            <h2> <%= detailObj.name %> </h2>
-            <p> <%= detailObj.address %> </p>
-            <button>Add your thoughts</button>
-        </div>
+       
         
         <article>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ipsam facere quibusdam! Officia quod earum voluptatibus temporibus laudantium ullam deserunt. Vero necessitatibus harum excepturi illo eum voluptatibus commodi dolore provident.</p>

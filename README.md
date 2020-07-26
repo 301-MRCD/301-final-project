@@ -1,6 +1,14 @@
 # 301-final-project
 Team :  Davee Sok, Ryan Geddes, Chris Bortel, Michelle Salazar
 
+**SCRATCH BOARD**
+
+Links we may need to come back to:
+Dog Friendly Restaurant API links:
+https://docs.developer.yelp.com/reference#business-update
+https://www.yelp.com/search?find_desc=Dog+Friendly+Restaurants&find_loc=Seattle%2C+WA
+
+
 **Heroku app**
 https://mister-cd-301-final.herokuapp.com/
 
@@ -153,3 +161,24 @@ list	        GET     /volumes?q={search terms}	                Performs a book s
 Example: https://www.googleapis.com/books/v1/volumes?q={search terms}
 Postman Test 1: https://www.googleapis.com/books/v1/volumes?q=dogs
 Result: Object of results. Successful!
+
+
+
+
+
+
+
+details snippet
+ <div>
+            <img src="<%= detailObj.image_url%>" width="200px">
+        </div>
+        <div>
+            <h2> <%= detailObj.name %> </h2>
+            <p> <%= detailObj.address %> </p>
+            <form method="post" action="/add_ratings?_method=post">
+                <input type="number" name="rating" placeholder="0-5">
+                <input type="hidden" name="yelp_id" value="<%= detailObj.yelp_id %>">
+                <button type="submit">Rate it</button>
+                <i class="fas fa-paw"></i>
+            </form> 
+        </div>
