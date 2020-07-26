@@ -168,17 +168,6 @@ Result: Object of results. Successful!
 
 
 
-details snippet
- <div>
-            <img src="<%= detailObj.image_url%>" width="200px">
-        </div>
-        <div>
-            <h2> <%= detailObj.name %> </h2>
-            <p> <%= detailObj.address %> </p>
-            <form method="post" action="/add_ratings?_method=post">
-                <input type="number" name="rating" placeholder="0-5">
-                <input type="hidden" name="yelp_id" value="<%= detailObj.yelp_id %>">
-                <button type="submit">Rate it</button>
-                <i class="fas fa-paw"></i>
-            </form> 
-        </div>
+
+   
+        

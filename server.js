@@ -25,9 +25,9 @@ app.use(override('_method'));
 // ROUTES
 // ---------------------------------------------
 app.get('/', handleHome);
-app.get('/render_results', renderResults);
-app.post('/render_details', renderDetail);
-app.post('/add_ratings', addRatings);
+app.get('/render-results', renderResults);
+app.post('/render-details', renderDetail);
+app.post('/add-ratings', addRatings);
 // app.get('/render_about', renderAbout);
 
 app.use('*', handleNotFound);
@@ -52,7 +52,7 @@ function renderResults(req, res) {
     categories: 'dog_parks',
     sort_by: 'distance',
     location: searchQuery,
-    limit: 5,
+    limit: 20,
   };
 
   superagent
@@ -75,49 +75,64 @@ function renderDetail(req, res) {
     .query(SQL, values)
     .then((results) => {
       if (results.rowCount === 0) {
-        console.log(
-          'results from line 74++++++++++++++++++++++++++++++',
-          results
-        );
-        createParkRating(req.body.yelp_id, req.body.name, res);
+        createParkRating(req.body.yelp_id, req.body.name, res, req.body.image_url, req.body.address);
       } else {
-        // render existing rating
-
         let average =results.rows[0].total_ratings / results.rows[0].total_votes || 0;
-        console.log('I am average 94+++++++++++++++++', average);
-        res
-          .status(200)
-          .render('pages/details', {
+        res.status(200).render('pages/details', {
             ratings: results.rows[0],
             average1: average,
+            image_url: req.body.image_url,
+            name: req.body.name,
+            address: req.body.address,
+            yelp_id: req.body.yelp_id
           });
       }
     })
     .catch((error) => handleError(error, res));
 }
 
-function createParkRating(yelp_id, park_name, res) {
+function createParkRating(yelp_id, park_name, res, imageurl, address) {
   let SQL = `INSERT INTO parks_table (yelp_id, park_name, total_ratings, total_votes)  VALUES ($1, $2, $3, $4) RETURNING *;`;
   let safequery = [yelp_id, park_name, 0, 0];
   client
     .query(SQL, safequery)
     .then((results) => {
-      console.log(
-        results.rows[0]
-      );
       let average =
         results.rows[0].total_ratings / results.rows[0].total_votes || 0;
       res.status(200).render('pages/details', {
         ratings: results.rows[0],
-        average1: average
+        average1: average,
+        image_url: imageurl,
+        name: park_name,
+        yelp_id: yelp_id,
+        address: address
       });
     })
     .catch((error) => handleError(error, res));
 }
 
 function addRatings(req, res) {
-  //on submit of rating send users rating to database and increment # of ratings by 1
-  //pull update park rating and render to page
+  let SQL = ` UPDATE parks_table
+  SET total_ratings = $1, total_votes = $2
+  WHERE yelp_id = $3
+  RETURNING * `;
+  let newTotalRatings = +req.body.total_ratings + +req.body.rating;
+  let newTotalVotes = +req.body.total_votes + 1;
+  let params = [newTotalRatings, newTotalVotes, req.body.yelp_id];
+
+  client
+    .query(SQL, params)
+    .then(results => {
+      let average =results.rows[0].total_ratings / results.rows[0].total_votes || 0;
+      res.status(200).render('pages/details', {
+        ratings: results.rows[0],
+        average1: average,
+        image_url: req.body.image_url,
+        name: req.body.name,
+        address: req.body.address,
+        yelp_id: req.body.yelp_id
+      });
+    });
 }
 
 function handleNotFound(req, res) {
