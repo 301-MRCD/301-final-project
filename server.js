@@ -83,8 +83,7 @@ function renderDetail(req, res) {
       } else {
         // render existing rating
 
-        let average =
-          results.rows[0].total_ratings / results.rows[0].total_votes || 0;
+        let average =results.rows[0].total_ratings / results.rows[0].total_votes || 0;
         console.log('I am average 94+++++++++++++++++', average);
         res
           .status(200)
@@ -104,18 +103,14 @@ function createParkRating(yelp_id, park_name, res) {
     .query(SQL, safequery)
     .then((results) => {
       console.log(
-        'I am results.rows+++++++++++++++++++++++++++',
         results.rows[0]
       );
       let average =
         results.rows[0].total_ratings / results.rows[0].total_votes || 0;
-      console.log('I am average 94+++++++++++++++++', average);
-      res
-        .status(200)
-        .render('pages/details', {
-          ratings: results.rows[0],
-          average1: average,
-        });
+      res.status(200).render('pages/details', {
+        ratings: results.rows[0],
+        average1: average
+      });
     })
     .catch((error) => handleError(error, res));
 }
@@ -123,41 +118,6 @@ function createParkRating(yelp_id, park_name, res) {
 function addRatings(req, res) {
   //on submit of rating send users rating to database and increment # of ratings by 1
   //pull update park rating and render to page
-}
-
-function comebacktome(req, res) {
-  console.log(`req.body: ${req.body.name}`);
-  let SQL = 'INSERT INTO parks (name, url) VALUES ($1, $2) RETURNING *;';
-
-  let param = [req.body.name, req.body.url];
-
-  client
-    .query(SQL, param)
-    .then((results) => {
-      console.log(`results: ${results.rows}`);
-      res.redirect(`/`);
-    })
-    .catch((error) => {
-      console.log(`error with addPokemon: ${error}`);
-      res.status(500).send(error);
-    });
-}
-
-function handleFavorites(req, res) {
-  //create query
-  const SQL = 'SELECT * from parks';
-
-  //give our SQL query to our pg 'agent'
-  client
-    .query(SQL)
-    .then((results) => {
-      res.render('favorites', { savedCritters: results.rows });
-      // res.status(200).json(results);
-    })
-    .catch((error) => {
-      console.log(`error with handleFavorites: ${error}`);
-      res.status(500).send(error);
-    });
 }
 
 function handleNotFound(req, res) {
