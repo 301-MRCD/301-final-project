@@ -77,12 +77,8 @@ function renderDetail(req, res) {
       if (results.rowCount === 0) {
         createParkRating(req.body.yelp_id, req.body.name, res, req.body.image_url, req.body.address);
       } else {
-        // render existing rating
-
         let average =results.rows[0].total_ratings / results.rows[0].total_votes || 0;
-        res
-          .status(200)
-          .render('pages/details', {
+        res.status(200).render('pages/details', {
             ratings: results.rows[0],
             average1: average,
             image_url: req.body.image_url,
@@ -116,8 +112,6 @@ function createParkRating(yelp_id, park_name, res, imageurl, address) {
 }
 
 function addRatings(req, res) {
-  // console.log('this is req.body line 120 +++++++++++++++++++', req.body);
-  // upadate statement
   let SQL = ` UPDATE parks_table
   SET total_ratings = $1, total_votes = $2
   WHERE yelp_id = $3
@@ -125,7 +119,7 @@ function addRatings(req, res) {
   let newTotalRatings = +req.body.total_ratings + +req.body.rating;
   let newTotalVotes = +req.body.total_votes + 1;
   let params = [newTotalRatings, newTotalVotes, req.body.yelp_id];
-  
+
   client
     .query(SQL, params)
     .then(results => {
@@ -138,7 +132,6 @@ function addRatings(req, res) {
         address: req.body.address,
         yelp_id: req.body.yelp_id
       });
-
     });
 }
 
