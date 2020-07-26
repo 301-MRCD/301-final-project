@@ -91,7 +91,9 @@ function renderDetail(req, res) {
             ratings: results.rows[0],
             average1: average,
             image_url: req.body.image_url,
-            name: req.body.name
+            name: req.body.name,
+            address: req.body.address,
+            yelp_id: req.body.yelp_id
           });
       }
     })
