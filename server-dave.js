@@ -68,6 +68,7 @@ function renderResults(req, res) {
 }
 
 function renderDetail(req, res) {
+  console.log('req.body from line 71++++++++++++++', req.body);
   let SQL = `SELECT * FROM parks_table WHERE yelp_id=$1`;
   let values = [req.body.yelp_id];
   client
@@ -76,6 +77,7 @@ function renderDetail(req, res) {
       if (results.rowCount === 0) {
         createParkRating(req.body.yelp_id, req.body.name, res, req.body.image_url, req.body.address);
       } else {
+        makeMultipleAPIcalls(req.body.address).then(result => console.log('makeMultipleAPIcalls+++++++++++++', result));
         let average = results.rows[0].total_ratings / results.rows[0].total_votes || 0;
         res.status(200).render('pages/details', {
           ratings: results.rows[0],
@@ -97,6 +99,7 @@ function createParkRating(yelp_id, park_name, res, imageurl, address) {
   client
     .query(SQL, safequery)
     .then(results => {
+      makeMultipleAPIcalls(address).then(result => console.log('makeMultipleAPIcalls+++++++++++++', result));
       let average = results.rows[0].total_ratings / results.rows[0].total_votes || 0;
       res.status(200).render('pages/details', {
         ratings: results.rows[0],
@@ -135,16 +138,16 @@ function addRatings(req, res) {
 
 
 function makeMultipleAPIcalls(location) {
-  let API1 = 'https://api.yelp.com/v3/businesses/search?term=truck&category=restaurant&location=seattle&sort_by=distance';
+  let API1 = 'https://api.yelp.com/v3/businesses/search';
   let queryObj1 = {
-    term: 'truck',
+    term: 'food truck',
     category: 'restaurant',
-    location: 'location',
+    location: location,
     sort_by: 'distance',
     limit: 5,
   };
 
-  superagent
+  return superagent
     .get(API1)
     .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
     .query(queryObj1)
@@ -152,6 +155,7 @@ function makeMultipleAPIcalls(location) {
       console.log('This is apiData1.body.businesses from line 107+++++++++++', apiData1.body.businesses);
       let foodTruckArr = apiData1.body.businesses.map(truck => new FoodTrucks(truck));
       console.log('This is foodTruckArr from line 154+++++++++++++++++++++++', foodTruckArr);
+      return foodTruckArr;
     });
 }
 
@@ -159,8 +163,32 @@ function FoodTrucks(obj) {
   this.food_truck_name = obj.name;
   this.food_truck_image_url = obj.image_url;
   this.food_truck_url = obj.url;
-  this.food_truck_address = obj.location.display_address[0] + ' ' + obj.location.display_address[1];
+  this.food_truck_address = obj.location.display_address;
   this.food_truck_phone = obj.phone;
+}
+
+function Groomers(obj) {
+  this.groomers_name = obj.name;
+  this.groomers_image_url = obj.image_url;
+  this.groomers_url = obj.url;
+  this.groomers_address = obj.location.display_address;
+  this.groomers_phone = obj.phone;
+}
+
+function Vets(obj) {
+  this.vets_name = obj.name;
+  this.vets_image_url = obj.image_url;
+  this.vets_url = obj.url;
+  this.vets_address = obj.location.display_address;
+  this.vets_phone = obj.phone;
+}
+
+function DogDayCare(obj) {
+  this.dog_dayCare_name = obj.name;
+  this.dog_dayCare_image_url = obj.image_url;
+  this.dog_dayCare_url = obj.url;
+  this.dog_dayCare_address = obj.location.display_address;
+  this.dog_dayCare_phone = obj.phone;
 }
 
 function handleNotFound(req, res) {
