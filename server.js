@@ -119,16 +119,27 @@ function createParkRating(yelp_id, park_name, res, imageurl, address) {
 }
 
 function addRatings(req, res) {
-  //on submit of rating send users rating to database and increment # of ratings by 1
-  //pull update park rating and render to page
 
-  // need a sql statement
-  // select statement
-  // let SQL = `SELECT total_ratings total_votes FROM parks_table WHERE yelp_id = $1 `;
-  
   // upadate statement
-  console.log('this is info from the add rating form +++++++++++++++++++++', req.body);
-  res.status(200).send(req.body);
+  let SQL = ` UPDATE parks_table
+  SET total_ratings = $1, total_votes = $2
+  WHERE yelp_id = $3
+  RETURNING * `;
+  let newTotalRatings = +req.body.total_ratings + +req.body.rating;
+  let newTotalVotes = +req.body.total_votes + 1;
+  console.log('this is req.body.totalratings+++++++++++++++++',req.body.total_ratings);
+  console.log('this is req.body.ratings+++++++++++++++++',req.body.rating);
+  console.log('this is newtotalratings on line 130+++++++++++++++++++++++', newTotalRatings);
+  console.log('this is newTotalVotes ++++++++++++++++++++++++++++++++', newTotalVotes);
+  let params = [newTotalRatings, newTotalVotes, req.body.yelp_id];
+  console.log('this is params from line 128 +++++++++++++++++++++', params);
+  
+  client
+    .query(SQL, params)
+    .then(results => {
+      console.log('this is results from addRatings on 134+++++++++++++++', results.rows);
+      res.status(200).render('pages/details', {ratings:results.row[0]});
+    })
 }
 
 function handleNotFound(req, res) {
