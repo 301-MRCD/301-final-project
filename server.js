@@ -101,9 +101,6 @@ function createParkRating(yelp_id, park_name, res, imageurl, address) {
   client
     .query(SQL, safequery)
     .then((results) => {
-      console.log(
-        results.rows[0]
-      );
       let average =
         results.rows[0].total_ratings / results.rows[0].total_votes || 0;
       res.status(200).render('pages/details', {
@@ -119,7 +116,7 @@ function createParkRating(yelp_id, park_name, res, imageurl, address) {
 }
 
 function addRatings(req, res) {
-
+  // console.log('this is req.body line 120 +++++++++++++++++++', req.body);
   // upadate statement
   let SQL = ` UPDATE parks_table
   SET total_ratings = $1, total_votes = $2
@@ -127,19 +124,22 @@ function addRatings(req, res) {
   RETURNING * `;
   let newTotalRatings = +req.body.total_ratings + +req.body.rating;
   let newTotalVotes = +req.body.total_votes + 1;
-  console.log('this is req.body.totalratings+++++++++++++++++',req.body.total_ratings);
-  console.log('this is req.body.ratings+++++++++++++++++',req.body.rating);
-  console.log('this is newtotalratings on line 130+++++++++++++++++++++++', newTotalRatings);
-  console.log('this is newTotalVotes ++++++++++++++++++++++++++++++++', newTotalVotes);
   let params = [newTotalRatings, newTotalVotes, req.body.yelp_id];
-  console.log('this is params from line 128 +++++++++++++++++++++', params);
   
   client
     .query(SQL, params)
     .then(results => {
-      console.log('this is results from addRatings on 134+++++++++++++++', results.rows);
-      res.status(200).render('pages/details', {ratings:results.row[0]});
-    })
+      let average =results.rows[0].total_ratings / results.rows[0].total_votes || 0;
+      res.status(200).render('pages/details', {
+        ratings: results.rows[0],
+        average1: average,
+        image_url: req.body.image_url,
+        name: req.body.name,
+        address: req.body.address,
+        yelp_id: req.body.yelp_id
+      });
+
+    });
 }
 
 function handleNotFound(req, res) {
