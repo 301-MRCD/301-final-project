@@ -116,15 +116,21 @@ function addRatings(req, res) {
 
 ///////////////////////////////////////////
 function helpRenderDetails(req, res, psqlResults) {
-  makeMultipleAPIcalls(req.body.address).then(APIresult => console.log('makeMultipleAPIcalls+++++++++++++++', APIresult));
-  let average = psqlResults.rows[0].total_ratings / psqlResults.rows[0].total_votes || 0;
-  res.status(200).render('pages/details', {
-    ratings: psqlResults.rows[0],
-    average1: average,
-    image_url: req.body.image_url,
-    name: req.body.name,
-    address: req.body.address,
-    yelp_id: req.body.yelp_id,
+  makeMultipleAPIcalls(req.body.address).then(APIresult => {
+    console.log('APIresult from line 120++++++++++++++++++++++++++++', APIresult);
+    let average = psqlResults.rows[0].total_ratings / psqlResults.rows[0].total_votes || 0;
+    res.status(200).render('pages/details', {
+      ratings: psqlResults.rows[0],
+      average1: average,
+      image_url: req.body.image_url,
+      name: req.body.name,
+      address: req.body.address,
+      yelp_id: req.body.yelp_id,
+      foodTruckArr: APIresult.foodtruck1,
+      groomersArr: APIresult.groomer1,
+      vetsArr: APIresult.vets1,
+      dogDayCareArr: APIresult.dogDayCare1
+    });
   });
 }
 
