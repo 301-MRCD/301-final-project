@@ -13,10 +13,10 @@
     <%- include ( '../layout/head' ) %>
   </head>
   <body>
+    <header>
+      <%- include ( '../layout/header' ) %>
+    </header>
     <main>
-      <header>
-        <%- include ( '../layout/header' ) %>
-      </header>
       <div>
         <h1><%= ratings.total_ratings %></h1>
         <h1><%= ratings.total_votes %></h1>
@@ -24,7 +24,7 @@
       </div>
       <section>
         <div>
-          <img src="<%= image_url%>" width="200px" />
+          <img src="<%= image_url%>" width="200px">
           <h2><%= name %></h2>
           <p><%= address %></p>
           <form method="post" action="/add-ratings">

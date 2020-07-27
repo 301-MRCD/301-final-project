@@ -8,6 +8,10 @@ Dog Friendly Restaurant API links:
 https://docs.developer.yelp.com/reference#business-update
 https://www.yelp.com/search?find_desc=Dog+Friendly+Restaurants&find_loc=Seattle%2C+WA
 
+how to use Goole Maps API:
+
+https://www.youtube.com/watch?v=8NUqDc1bQ84
+
 
 **Heroku app**
 https://mister-cd-301-final.herokuapp.com/
