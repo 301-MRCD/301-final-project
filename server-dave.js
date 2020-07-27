@@ -38,10 +38,7 @@ app.use(handleError);
 // ----------------------------------------------
 
 function handleHome(req, res) {
-  res
-    .status(200)
-    .render('pages/index')
-    .catch(error => handleError(error, res));
+  res.status(200).render('pages/index');
 }
 
 function renderResults(req, res) {
@@ -209,32 +206,32 @@ function FoodTrucks(obj) {
   this.food_truck_name = obj.name;
   this.food_truck_image_url = obj.image_url;
   this.food_truck_url = obj.url;
-  this.food_truck_address = obj.location.display_address;
-  this.food_truck_phone = obj.phone;
+  this.food_truck_address = obj.location.display_address[0] + ' ' + (obj.location.display_address[1] || '');
+  this.food_truck_phone = obj.display_phone;
 }
 
 function Groomers(obj) {
   this.groomers_name = obj.name;
   this.groomers_image_url = obj.image_url;
   this.groomers_url = obj.url;
-  this.groomers_address = obj.location.display_address;
-  this.groomers_phone = obj.phone;
+  this.groomers_address = obj.location.display_address[0] + ' ' + (obj.location.display_address[1] || '');
+  this.groomers_phone = obj.display_phone;
 }
 
 function Vets(obj) {
   this.vets_name = obj.name;
   this.vets_image_url = obj.image_url;
   this.vets_url = obj.url;
-  this.vets_address = obj.location.display_address;
-  this.vets_phone = obj.phone;
+  this.vets_address = obj.location.display_address[0] + ' ' + (obj.location.display_address[1] || '');
+  this.vets_phone = obj.display_phone;
 }
 
 function DogDayCare(obj) {
   this.dog_dayCare_name = obj.name;
   this.dog_dayCare_image_url = obj.image_url;
   this.dog_dayCare_url = obj.url;
-  this.dog_dayCare_address = obj.location.display_address;
-  this.dog_dayCare_phone = obj.phone;
+  this.dog_dayCare_address = obj.location.display_address[0] + ' ' + (obj.location.display_address[1] || '');
+  this.dog_dayCare_phone = obj.display_phone;
 }
 
 
@@ -247,7 +244,7 @@ function Park(obj) {
   this.yelp_id = obj.id;
   this.name = obj.name;
   this.image_url = obj.image_url;
-  this.address = obj.location.display_address;
+  this.address = obj.location.display_address[0] + ' ' + (obj.location.display_address[1] || '');
   this.lat = obj.coordinates.latitude;
   this.long = obj.coordinates.longitude;
   // //db data
