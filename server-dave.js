@@ -282,8 +282,3 @@ client
   .then(() => {
     app.listen(PORT, () => console.log('server running on port', PORT));
   });
-
-
-
-
-// makeMultipleAPIcalls(req.body.name).then(APIresult => console.log('makeMultipleAPIcalls+++++++++++++', APIresult));
