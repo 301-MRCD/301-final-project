@@ -67,6 +67,7 @@ express, superagent, cors, ejs, morgan, pg.
 
 07-23-2020 9:45pm - Application 
 
+07-24-2020 - planning. frontend prototype refactored and broken into the html elements that will be needed in the ejs files. Further research on google maps api. Setting up the ejs templates. 
 ## Credits and Collaborations
 John Cokos - Lead Instructor
 Ray Ruazol - Assistant Instructor

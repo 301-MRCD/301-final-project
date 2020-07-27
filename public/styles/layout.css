@@ -16,9 +16,22 @@ header {
   width: 100%;
   background-color: white;
 }
+
 nav {
   padding: 1rem 0rem;
 }
+
+ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+@media screen and (max-width: 767px) {
+
+}
+
+
 
 h1 {
   text-align: center;
@@ -29,13 +42,10 @@ h1 {
 h3 {
   font-size: 12px;
 }
-ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
+
 
 .search-container {
+  margin-top: 70px;
   display: flex;
   justify-content: center;
   /* border: 1px solid black; */

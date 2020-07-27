@@ -139,7 +139,7 @@ function makeMultipleAPIcalls(location) {
     category: 'restaurant',
     location: location,
     sort_by: 'distance',
-    limit: 5
+    limit: 6
   };
 
   let queryGroomers = {
@@ -147,7 +147,7 @@ function makeMultipleAPIcalls(location) {
     category: 'petservices,All',
     location: location,
     sort_by: 'distance',
-    limit: 5
+    limit: 6
   };
 
   let queryVets = {
@@ -155,7 +155,7 @@ function makeMultipleAPIcalls(location) {
     category: 'vet,All',
     location: location,
     sort_by: 'distance',
-    limit: 5
+    limit: 6
   };
 
   let queryDogDayCare = {
@@ -163,7 +163,7 @@ function makeMultipleAPIcalls(location) {
     category: 'petservices,All',
     location: location,
     sort_by: 'distance',
-    limit: 5
+    limit: 6
   };
 
   return superagent

@@ -49,28 +49,36 @@
       </div>
 
       <div class="businesses_container">
-        <% foodTruckArr.forEach(truck => { %>
-        <div class="businesses_cards">
-          <h2><%=truck.food_truck_name%></h2>
-          <img src="<%= truck.food_truck_image_url%>" width="200px" />
-          <p><%= truck.food_truck_address %></p>
-          <p><%= truck.food_truck_phone %></p>
-        </div>
-        <% }) %> <% groomersArr.forEach(groomer => { %>
+        <section class="foodtrucks">
+          <% foodTruckArr.forEach(truck => { %>
+            <div class="businesses_cards">
+              <h2><%=truck.food_truck_name%></h2>
+              <img src="<%= truck.food_truck_image_url%>" width="200px" />
+              <p><%= truck.food_truck_address %></p>
+              <p><%= truck.food_truck_phone %></p>
+            </div>
+            <% }) %>
+        </section>
+        
+        <% groomersArr.forEach(groomer => { %>
         <div class="businesses_cards">
           <h2><%=groomer.groomers_name%></h2>
           <img src="<%= groomer.groomers_image_url%>" width="200px" />
           <p><%= groomer.groomers_address %></p>
           <p><%= groomer.groomers_phone %></p>
         </div>
-        <% }) %> <% vetsArr.forEach(vet => { %>
+        <% }) %> 
+        
+        <% vetsArr.forEach(vet => { %>
         <div class="businesses_cards">
           <h2><%=vet.vets_name%></h2>
           <img src="<%= vet.vets_image_url%>" width="200px" />
           <p><%= vet.vets_address %></p>
           <p><%= vet.vets_phone %></p>
         </div>
-        <% }) %> <% dogDayCareArr.forEach(care => { %>
+        <% }) %>
+        
+        <% dogDayCareArr.forEach(care => { %>
         <div class="businesses_cards">
           <h2><%=care.dog_dayCare_name%></h2>
           <img src="<%= care.dog_dayCare_image_url%>" width="200px" />
@@ -78,6 +86,7 @@
           <p><%= care.dog_dayCare_phone %></p>
         </div>
         <% }) %>
+
       </div>
     </main>
   </body>
