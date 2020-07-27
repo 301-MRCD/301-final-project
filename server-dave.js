@@ -66,51 +66,35 @@ function renderResults(req, res) {
     .catch(error => handleError(error, res));
 }
 
+
 function renderDetail(req, res) {
-  console.log('req.body from line 71++++++++++++++', req.body);
+  console.log('this is req.body from line 70+++++++++++++++++', req.body);
   let SQL = `SELECT * FROM parks_table WHERE yelp_id=$1`;
   let values = [req.body.yelp_id];
   client
     .query(SQL, values)
     .then(results => {
       if (results.rowCount === 0) {
-        createParkRating(req.body.yelp_id, req.body.name, res, req.body.image_url, req.body.address);
+        createParkRating(req, res);
       } else {
-        makeMultipleAPIcalls(req.body.address).then(result => console.log('makeMultipleAPIcalls+++++++++++++', result));
-        let average = results.rows[0].total_ratings / results.rows[0].total_votes || 0;
-        res.status(200).render('pages/details', {
-          ratings: results.rows[0],
-          average1: average,
-          image_url: req.body.image_url,
-          name: req.body.name,
-          address: req.body.address,
-          yelp_id: req.body.yelp_id,
-        });
+        helpRenderDetails(req, res, results);
       }
     })
     .catch(error => handleError(error, res));
 }
 
 
-function createParkRating(yelp_id, park_name, res, imageurl, address) {
+function createParkRating(req, res) {
   let SQL = `INSERT INTO parks_table (yelp_id, park_name, total_ratings, total_votes)  VALUES ($1, $2, $3, $4) RETURNING *;`;
-  let safequery = [yelp_id, park_name, 0, 0];
+  let safequery = [req.body.yelp_id, req.body.name, 0, 0];
   client
     .query(SQL, safequery)
     .then(results => {
-      makeMultipleAPIcalls(address).then(result => console.log('makeMultipleAPIcalls+++++++++++++', result));
-      let average = results.rows[0].total_ratings / results.rows[0].total_votes || 0;
-      res.status(200).render('pages/details', {
-        ratings: results.rows[0],
-        average1: average,
-        image_url: imageurl,
-        name: park_name,
-        yelp_id: yelp_id,
-        address: address,
-      });
+      helpRenderDetails(req, res, results);
     })
     .catch(error => handleError(error, res));
 }
+
 
 function addRatings(req, res) {
   let SQL = ` UPDATE parks_table
@@ -122,19 +106,26 @@ function addRatings(req, res) {
   let params = [newTotalRatings, newTotalVotes, req.body.yelp_id];
 
   client
-    .query(SQL, params).then(results => {
-      let average = results.rows[0].total_ratings / results.rows[0].total_votes || 0;
-      res.status(200).render('pages/details', {
-        ratings: results.rows[0],
-        average1: average,
-        image_url: req.body.image_url,
-        name: req.body.name,
-        address: req.body.address,
-        yelp_id: req.body.yelp_id,
-      });
-    });
+    .query(SQL, params)
+    .then(results => {
+      helpRenderDetails(req, res, results);
+    })
+    .catch(error => handleError(error, res));
 }
 
+
+///////////////////////////////////////////
+function helpRenderDetails(req, res, psqlResults) {
+  let average = psqlResults.rows[0].total_ratings / psqlResults.rows[0].total_votes || 0;
+  res.status(200).render('pages/details', {
+    ratings: psqlResults.rows[0],
+    average1: average,
+    image_url: req.body.image_url,
+    name: req.body.name,
+    address: req.body.address,
+    yelp_id: req.body.yelp_id,
+  });
+}
 
 function makeMultipleAPIcalls(location) {
   let API1 = 'https://api.yelp.com/v3/businesses/search';
@@ -171,7 +162,6 @@ function makeMultipleAPIcalls(location) {
     limit: 5
   };
 
-
   return superagent
     .get(API1)
     .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
@@ -206,7 +196,6 @@ function makeMultipleAPIcalls(location) {
         });
     });
 }
-
 
 
 function FoodTrucks(obj) {
@@ -282,3 +271,9 @@ client
   .then(() => {
     app.listen(PORT, () => console.log('server running on port', PORT));
   });
+
+
+
+
+
+// makeMultipleAPIcalls(req.body.name).then(APIresult => console.log('makeMultipleAPIcalls+++++++++++++', APIresult));
