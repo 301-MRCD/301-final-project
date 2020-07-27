@@ -230,15 +230,6 @@ function DogDayCare(obj) {
   this.dog_dayCare_phone = obj.phone;
 }
 
-function handleNotFound(req, res) {
-  res.status(404).send('Could Not Find What You Asked For');
-}
-
-// 500 (catastrophic) error handler. Log it, and then tell the user
-function handleError(error, res) {
-  console.error(error);
-  res.status(500).render('error', { error_data: error });
-}
 
 // ----------------------------------------------
 // CONSTRUCTORS
@@ -260,18 +251,30 @@ function Park(obj) {
   // this.water = '';
   // this.description = '';
 }
+
+// ----------------------------------------------
+// Error Handlers
+// ----------------------------------------------
+
+function handleNotFound(req, res) {
+  res.status(404).send('Could Not Find What You Asked For');
+}
+
+// 500 (catastrophic) error handler. Log it, and then tell the user
+function handleError(error, res) {
+  console.error(error);
+  res.status(500).render('error', { error_data: error });
+}
+
 // ----------------------------------------------
 // CONNECT
 // ----------------------------------------------
-
-//app.listen(process.env.PORT, () => console.log(`Server is running on ${process.env.PORT}`));
 
 client
   .connect()
   .then(() => {
     app.listen(PORT, () => console.log('server running on port', PORT));
   });
-
 
 
 
