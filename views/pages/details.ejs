@@ -18,7 +18,7 @@
       </div>
       <section>
         <div>
-          <img src="<%= image_url%>" width="200px">
+          <img src="<%= image_url%>" width="200px" />
           <h2><%= name %></h2>
           <p><%= address %></p>
           <form method="post" action="/add-ratings">
@@ -45,51 +45,54 @@
         <h3>Nearby dog friendly locations</h3>
         <button class="truck_button">Food Truck</button>
         <button class="groomers_button">Groomers</button>
-        <button class="vets_button">Vets</button>
+        <button class="vet_button">Vets</button>
         <button class="dayCare_button">Dog Day Care</button>
-        
       </div>
 
       <div class="businesses_container">
-        
-      
+        <section class="truck_card">
           <% foodTruckArr.forEach(truck => { %>
-            <div class="businesses_cards truck_card">
-              <h2><%=truck.food_truck_name%></h2>
-              <img src="<%= truck.food_truck_image_url%>" width="200px" />
-              <p><%= truck.food_truck_address %></p>
-              <p><%= truck.food_truck_phone %></p>
-            </div>
-            <% }) %>
-       
-        
-        <% groomersArr.forEach(groomer => { %>
-        <div class="businesses_cards groomer_card">
-          <h2><%=groomer.groomers_name%></h2>
-          <img src="<%= groomer.groomers_image_url%>" width="200px" />
-          <p><%= groomer.groomers_address %></p>
-          <p><%= groomer.groomers_phone %></p>
-        </div>
-        <% }) %> 
-        
-        <% vetsArr.forEach(vet => { %>
-        <div class="businesses_cards vet_card">
-          <h2><%=vet.vets_name%></h2>
-          <img src="<%= vet.vets_image_url%>" width="200px" />
-          <p><%= vet.vets_address %></p>
-          <p><%= vet.vets_phone %></p>
-        </div>
-        <% }) %>
-        
-        <% dogDayCareArr.forEach(care => { %>
-        <div class="businesses_cards dayCare_card">
-          <h2><%=care.dog_dayCare_name%></h2>
-          <img src="<%= care.dog_dayCare_image_url%>" width="200px" />
-          <p><%= care.dog_dayCare_address %></p>
-          <p><%= care.dog_dayCare_phone %></p>
-        </div>
-        <% }) %>
+          <div class="businesses_cards">
+            <h2><%=truck.food_truck_name%></h2>
+            <img src="<%= truck.food_truck_image_url%>" width="200px" />
+            <p><%= truck.food_truck_address %></p>
+            <p><%= truck.food_truck_phone %></p>
+          </div>
+          <% }) %>
+        </section>
 
+        <section class="groomer_card">
+          <% groomersArr.forEach(groomer => { %>
+          <div class="businesses_cards">
+            <h2><%=groomer.groomers_name%></h2>
+            <img src="<%= groomer.groomers_image_url%>" width="200px" />
+            <p><%= groomer.groomers_address %></p>
+            <p><%= groomer.groomers_phone %></p>
+          </div>
+          <% }) %>
+        </section>
+
+        <section class="vet_card">
+          <% vetsArr.forEach(vet => { %>
+          <div class="businesses_cards">
+            <h2><%=vet.vets_name%></h2>
+            <img src="<%= vet.vets_image_url%>" width="200px" />
+            <p><%= vet.vets_address %></p>
+            <p><%= vet.vets_phone %></p>
+          </div>
+          <% }) %>
+        </section>
+
+        <section class="dayCare_card">
+          <% dogDayCareArr.forEach(care => { %>
+          <div class="businesses_cards">
+            <h2><%=care.dog_dayCare_name%></h2>
+            <img src="<%= care.dog_dayCare_image_url%>" width="200px" />
+            <p><%= care.dog_dayCare_address %></p>
+            <p><%= care.dog_dayCare_phone %></p>
+          </div>
+          <% }) %>
+        </section>
       </div>
     </main>
     <footer>

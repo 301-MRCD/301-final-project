@@ -4,13 +4,13 @@
 }
 
 .groomer_card {
-  visibility: hidden;
+  display: none;
 }
 
 .vet_card {
-  visibility: hidden;
+  display: none;
 }
 
 .dayCare_card {
-  visibility: hidden;
+  display: none;
 }
