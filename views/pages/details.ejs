@@ -1,13 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
-  <script
-    src="https://kit.fontawesome.com/6338afea35.js"
-    crossorigin="anonymous"
-  ></script>
 
   <head>
     <%- include ( '../layout/head' ) %>
@@ -18,13 +10,14 @@
       <%- include ( '../layout/header' ) %>
     </header>
     <main>
+
       <div class="details-top">
         <img src="<%= image_url%>" width="200px" />
         <h2><%= name %></h2>
         <p><%= address %></p>
       </div>
 
-      <section>
+      
         <div class="rate-it-container">
           <form method="post" action="/add-ratings">
             <input type="number" name="rating" placeholder="0-5" min="1" max="5" />
@@ -49,8 +42,8 @@
         <button class="dayCare_button">Dog Day Care</button>
       </div>
 
-      <div class="business-container">
-        <section class="truck_card">
+     
+        <section class="truck_card category">
           <% foodTruckArr.forEach(truck => { %>
           <div class="business-card">
             <h2><%=truck.food_truck_name%></h2>
@@ -61,7 +54,7 @@
           <% }) %>
         </section>
 
-        <section class="groomer_card">
+        <section class="groomer_card category">
           <% groomersArr.forEach(groomer => { %>
           <div class="business-card">
             <h2><%=groomer.groomers_name%></h2>
@@ -72,7 +65,7 @@
           <% }) %>
         </section>
 
-        <section class="vet_card">
+        <section class="vet_card category">
           <% vetsArr.forEach(vet => { %>
           <div class="business-card">
             <h2><%=vet.vets_name%></h2>
@@ -83,7 +76,7 @@
           <% }) %>
         </section>
 
-        <section class="dayCare_card">
+        <section class="dayCare_card category">
           <% dogDayCareArr.forEach(care => { %>
           <div class="business-card">
             <h2><%=care.dog_dayCare_name%></h2>
@@ -93,7 +86,7 @@
           </div>
           <% }) %>
         </section>
-      </div>
+
     </main>
     <footer>
       <%- include ( '../layout/footer' ) %>

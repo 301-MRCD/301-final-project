@@ -42,7 +42,6 @@ h3 {
 }
 
 
-
 fieldset input {
   margin-bottom: 2rem;
 }
@@ -61,13 +60,14 @@ fieldset input {
   flex-wrap: wrap;
   padding: 0;
   justify-content: space-evenly;
+  text-align: center;
   height: 45rem;
   overflow: scroll;
 }
 
 .result-card {
   background-color: rgba(240, 255, 255, 0.541);
-  width: 13.37rem;
+  width: 26rem;
   font-size: .5em;
   margin-top: 1rem;
   margin: .5rem;
@@ -75,8 +75,8 @@ fieldset input {
 }
 
 .result-card img {
-  width: 13.37rem;
-  max-height: 13.37rem;
+  width: 26rem;
+  max-height: 26rem;
 }
 
 
@@ -113,39 +113,9 @@ fieldset input {
   display:flex;
   flex-direction: row;
   margin: 0 auto;
-
 }
 
-.truck_card {
-  /* display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  padding: 0;
-  justify-content: space-evenly;
-  overflow: scroll;
-  margin: 2rem; */
- 
-}
-.groomer_card {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  justify-content: space-evenly;
-}
 
-.vet_card {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  justify-content: space-evenly;
-}
-
-.dayCare_card {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  justify-content: space-evenly;
-}
 
 .business-card {
   background-color: azure;
@@ -159,6 +129,13 @@ fieldset input {
   opacity: .75;
   width: 13.37rem;
   max-height: 13.37rem;
+}
+
+.category {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  justify-content: space-evenly;
 }
 
 themes {

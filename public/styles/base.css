@@ -4,6 +4,7 @@ html {
 }
 
 body {
+  background-image: url("images/fadedPark.png");
   background-color: #c7ecee;
 }
 
@@ -22,9 +23,16 @@ header {
   background-color: #33d9b26e
 }
 
+h3{
+  margin-top: auto;
+}
+
 footer {
+  display: flex;
+  margin: 1 auto;
   width: 90vw;
-  margin: 40px auto 10px;
+  /* margin: 40px auto 10px; */
+  flex-shrink: 0
 }
 
 themes {

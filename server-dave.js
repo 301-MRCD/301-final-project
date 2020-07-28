@@ -49,7 +49,7 @@ function renderResults(req, res) {
     categories: 'dog_parks',
     sort_by: 'distance',
     location: searchQuery,
-    limit: 20,
+    limit: 10,
   };
 
   superagent
