@@ -1,7 +1,12 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
 
 body {
   /* display: flex; */
-  background-color: bisque;
+  /* background-color: #f9f5edb3; */
+  background-color: #c7ecee;
 }
 
 main, footer {
@@ -14,7 +19,7 @@ header {
   top: 0;
   height: 50px;
   width: 100%;
-  background-color: white;
+  background-color: #33d9b2
 }
 
 nav {
@@ -27,22 +32,23 @@ ul {
   justify-content: space-evenly;
 }
 
-@media screen and (max-width: 767px) {
-
+a {
+  color: #f7f1e3;
+  font-size: 2rem;
 }
 
-
+@media screen and (max-width: 767px) {}
 
 h1 {
   text-align: center;
   font-size: 40px;
   margin-bottom: 20px;
+  color: #4E342E;
 }
 
 h3 {
   font-size: 12px;
 }
-
 
 .search-container {
   margin-top: 70px;
@@ -53,9 +59,7 @@ h3 {
 
 .map-container {
   margin: 20px auto;
-
 }
-
 
 /* Results */
 
@@ -64,24 +68,64 @@ h3 {
   flex-wrap: wrap;
   padding: 0;
   justify-content: space-evenly;
-  
 }
 
 .result-card {
   background-color: azure;
+  width: 13.37rem;
+  font-size: .5em;
+  margin-top: 1rem;
+  margin: .5rem;
+  /* overflow:scroll; */
+}
+
+.result-card img {
+  width: 13.37rem;
+  max-height: 13.37rem;
+}
+
+/* Details */
+
+.details-top {
+  margin: 2rem auto;
+  text-align: center;
+  padding: 1rem;
+}
+
+.form-container {
+  text-align: center;
+}
+
+.business-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  justify-content: space-evenly;
+}
+
+.business-card {
+  background-color: #f7f1e3;
   width: 9.37rem;
   font-size: .5em;
   margin-top: 1rem;
   margin: .5rem;
-  overflow:scroll;
+  overflow: scroll;
 }
 
-.result-card img {
+.business-card img {
   width: 9.37rem;
   max-height: 9.37rem;
 }
 
-footer { 
+footer {
   width: 90vw;
   margin: 40px auto 10px;
+}
+
+themes {
+  background-color: #33d9b2;
+  background-color: #ff793f;
+  background-color: #f7f1e3;
+  background-color: #aaa69d;
+  background-color: #4E342E;
 }
