@@ -1,0 +1,29 @@
+* {
+    background-color: azure;
+}
+
+.team div {
+    width: 20%;
+    height: 80%;
+    padding-top: 40%;
+    padding: 2%;
+    background-position: top;
+    float:left;
+    margin:10% 5px 5px 0;
+    background-color: lightcoral;
+    border-radius: 10%;
+    }
+.team h2 {
+    font-size: larger ;
+    font-weight: bold;
+    color: darkblue;
+    text-align: center;
+}
+
+.team img {
+    align-self: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}

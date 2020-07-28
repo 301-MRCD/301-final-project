@@ -3,5 +3,10 @@
 @import 'layout.css';
 @import 'modules.css';
 
-      
-      
+.themes {
+    background-color: #33D9B2;
+    background-color: #FF793F;
+    background-color: #F7F1E3;
+    background-color: #AAA69D;
+    background-color: #f3d7d1;
+  }

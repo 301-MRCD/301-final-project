@@ -30,7 +30,7 @@ app.get('/render-results', renderResults);
 // app.get('/render-maps', renderMap);
 app.post('/render-details', renderDetail);
 app.post('/add-ratings', addRatings);
-// app.get('/render_about', renderAbout);
+app.get('/render_about', renderAbout);
 
 app.use('*', handleNotFound);
 app.use(handleError);
@@ -45,6 +45,15 @@ function handleHome(req, res) {
   //     res.send(result.data);
   //   })
   res.status(200).render('pages/index')
+    .catch((error) => handleError(error, res));
+}
+
+function renderAbout(req, res) {
+  // axios.get('https://maps.googleapis.com/maps/api/js?key='+process.env.GOOGLE_API_KEY+'&callback=initMap')
+  //   .then(result => {
+  //     res.send(result.data);
+  //   })
+  res.status(200).render('pages/about')
     .catch((error) => handleError(error, res));
 }
 
