@@ -22,7 +22,7 @@
           <h2><%= name %></h2>
           <p><%= address %></p>
           <form method="post" action="/add-ratings">
-            <input type="number" name="rating" placeholder="0-5" />
+            <input type="number" name="rating" placeholder="0-5" min="1" max="5" />
             <input type="hidden" name="total_ratings" value="<%= ratings.total_ratings %>" />
             <input type="hidden" name="total_votes" value="<%= ratings.total_votes %>" />
             <input type="hidden" name="yelp_id" value="<%= yelp_id %>" />
