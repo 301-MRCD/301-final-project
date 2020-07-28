@@ -17,9 +17,9 @@ main, footer {
 header {
   position: fixed;
   top: 0;
-  height: 50px;
+  height: 6rem;
   width: 100%;
-  background-color: #33d9b28c
+  background-color: #33d9b26e
 }
 
 footer {

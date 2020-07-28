@@ -7,7 +7,8 @@ nav {
 ul {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  margin-left: 1rem;
 }
 
 a {
@@ -17,7 +18,7 @@ a {
 
 h1 {
   text-align: center;
-  font-size: 40px;
+  font-size: 5rem;
   margin-bottom: 20px;
   color: #4E342E;
 }
