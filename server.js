@@ -9,6 +9,7 @@ const superagent = require('superagent');
 const pg = require('pg');
 const cors = require('cors');
 const morgan = require('morgan');
+// const axios = require('axios');
 const client = new pg.Client(process.env.DATABASE_URL);
 const app = express();
 const PORT = process.env.PORT;
@@ -26,6 +27,7 @@ app.use(override('_method'));
 // ---------------------------------------------
 app.get('/', handleHome);
 app.get('/render-results', renderResults);
+// app.get('/render-maps', renderMap);
 app.post('/render-details', renderDetail);
 app.post('/add-ratings', addRatings);
 // app.get('/render_about', renderAbout);
@@ -38,9 +40,11 @@ app.use(handleError);
 // ----------------------------------------------
 
 function handleHome(req, res) {
-  res
-    .status(200)
-    .render('pages/index')
+  // axios.get('https://maps.googleapis.com/maps/api/js?key='+process.env.GOOGLE_API_KEY+'&callback=initMap')
+  //   .then(result => {
+  //     res.send(result.data);
+  //   })
+  res.status(200).render('pages/index')
     .catch((error) => handleError(error, res));
 }
 
@@ -61,6 +65,7 @@ function renderResults(req, res) {
     .query(queryObject)
     .then((obj) => {
       let apiData = obj.body.businesses.map((park) => new Park(park));
+      renderMap(req, res);
       res.status(200).render('pages/results', { parkArr: apiData });
     })
 
@@ -79,13 +84,13 @@ function renderDetail(req, res) {
       } else {
         let average =results.rows[0].total_ratings / results.rows[0].total_votes || 0;
         res.status(200).render('pages/details', {
-            ratings: results.rows[0],
-            average1: average,
-            image_url: req.body.image_url,
-            name: req.body.name,
-            address: req.body.address,
-            yelp_id: req.body.yelp_id
-          });
+          ratings: results.rows[0],
+          average1: average,
+          image_url: req.body.image_url,
+          name: req.body.name,
+          address: req.body.address,
+          yelp_id: req.body.yelp_id
+        });
       }
     })
     .catch((error) => handleError(error, res));
@@ -133,6 +138,34 @@ function addRatings(req, res) {
         yelp_id: req.body.yelp_id
       });
     });
+}
+
+function renderMap(req, res){
+// // const API =  https://www.google.com/maps/embed/v1/search?key=GOOGLE_API_KEY&q=record+stores+in+Seattle
+//   //this function needs to take in the user's search location and return a map of the area with all the parks rendered on the map.  This will be on the results page
+//   const searchQuery = req.query.searchQuery;
+//   console.log('searchQuery from renderMap++++++++++++++++++++++', searchQuery);
+//   const API = `https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&GOOGLE_API_KEY`;
+//   let queryObject = {
+//     GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+//     // callback: 'initMap',
+//     // query: '47.608013, -122.335167',
+//     // type: 'park',
+//     // keyword: 'dog'
+//   };
+//   console.log('this is the queryObject from line 144+++++++++++++++++++++', queryObject)
+
+//   superagent
+//     .get(API)
+//     .query(queryObject)
+//     .then((obj)=>{
+//       let googleApiData = obj;
+//       console.log('googleapidata obj.body line 156+++++++++++++++++++++', googleApiData);
+
+//     });
+//   //we need to pass in both the user's search queried location, and also the locations of all the parks that are returned by the Yelp API
+
+
 }
 
 function handleNotFound(req, res) {

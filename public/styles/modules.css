@@ -1,4 +1,16 @@
-.businesses_cards {
+.business_card {
   border: 1px green solid;
   margin: 1.5rem;
+}
+
+.groomer_card {
+  visibility: hidden;
+}
+
+.vet_card {
+  visibility: hidden;
+}
+
+.dayCare_card {
+  visibility: hidden;
 }

@@ -8,6 +8,10 @@ Dog Friendly Restaurant API links:
 https://docs.developer.yelp.com/reference#business-update
 https://www.yelp.com/search?find_desc=Dog+Friendly+Restaurants&find_loc=Seattle%2C+WA
 
+how to use Goole Maps API:
+
+https://www.youtube.com/watch?v=8NUqDc1bQ84
+
 
 **Heroku app**
 https://mister-cd-301-final.herokuapp.com/
@@ -63,6 +67,7 @@ express, superagent, cors, ejs, morgan, pg.
 
 07-23-2020 9:45pm - Application 
 
+07-24-2020 - planning. frontend prototype refactored and broken into the html elements that will be needed in the ejs files. Further research on google maps api. Setting up the ejs templates. 
 ## Credits and Collaborations
 John Cokos - Lead Instructor
 Ray Ruazol - Assistant Instructor
