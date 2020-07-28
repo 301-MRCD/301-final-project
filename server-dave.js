@@ -103,7 +103,6 @@ function addRatings(req, res) {
     .then(results => {
       console.log('ratings have been added to database', results.rows);
       helpRenderDetails(req, res, results);
-      // res.status(200);
     })
     .catch(error => handleError(error, res));
 }
@@ -111,11 +110,10 @@ function addRatings(req, res) {
 ///////////////////////////////////////////
 function helpRenderDetails(req, res, psqlResults) {
   makeMultipleAPIcalls(req.body.address).then(APIresult => {
-    console.log('APIresult from line 120++++++++++++++++++++++++++++', APIresult);
     let average = psqlResults.rows[0].total_ratings / psqlResults.rows[0].total_votes || 0;
     res.status(200).render('pages/details', {
       ratings: psqlResults.rows[0],
-      average1: average,
+      average1: average.toFixed(1),
       image_url: req.body.image_url,
       name: req.body.name,
       address: req.body.address,
