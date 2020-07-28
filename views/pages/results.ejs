@@ -3,14 +3,14 @@
 <head>
  <%- include ( '../layout/head' ) %>
 </head>
-<body>
+<body style="background-image: url('images/fadedPark.png');">
     <header>
         <%- include ( '../layout/header' ) %>
     </header>
    <main>
         <h1>Dog Park App</h1>
 
-        <div class="search-container">
+        <div class=" results-search-container">
             <form method="get" action="/render-results">
                 <fieldset>
                 <input type="text" placeholder="zipcode" name="searchQuery" required></input>
@@ -21,7 +21,7 @@
        
         <div class="map-container">
             <a href="https://placeholder.com"> 
-            <img src="https://via.placeholder.com/338x200?text=map" alt="">
+            <img src="https://via.placeholder.com/334x200?text=map" alt="">
             </a>
         </div>
     
@@ -30,19 +30,17 @@
                 <div class="result-card">
                     <img src="<%= park.image_url %>" width="200px" >
                     <h2> <%= park.name %> </h2>
-                    <p> <%= park.address %> </p>
                     <form class="location-form" method="post" action="/render-details"> 
                         <input type="hidden" name="image_url" value="<%= park.image_url %>">
                         <input type="hidden" name="name" value="<%= park.name %>">
                         <input type="hidden" name="address" value="<%= park.address %>">
                         <input type="hidden" name="yelp_id" value="<%=park.yelp_id%>">
-                        <button type="submit">Submit</button>
+                        <button type="submit">More Details</button>
                     </form>
                 </div>
             <%} %>
         </section>
             
-        
     </main>
     <footer>
         <%- include ( '../layout/footer' ) %>

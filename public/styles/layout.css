@@ -1,21 +1,4 @@
 
-body {
-  /* display: flex; */
-  background-color: bisque;
-}
-
-main, footer {
-  width: 90vw;
-  margin: 70px auto 20px;
-}
-
-header {
-  position: fixed;
-  top: 0;
-  height: 50px;
-  width: 100%;
-  background-color: white;
-}
 
 nav {
   padding: 1rem 0rem;
@@ -24,64 +7,141 @@ nav {
 ul {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  margin-left: 1rem;
 }
 
-@media screen and (max-width: 767px) {
-
+a {
+  color: #f7f1e3;
+  font-size: 2rem;
 }
-
-
 
 h1 {
   text-align: center;
-  font-size: 40px;
+  font-size: 5rem;
   margin-bottom: 20px;
+  color: #4E342E;
 }
 
 h3 {
   font-size: 12px;
 }
 
-
+/* index search container */
 .search-container {
   margin-top: 70px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  /* border: 1px solid black; */
+  width: 50%;
+  text-align: center;
+  background-color: rgba(240, 255, 255, 0.365);
+  margin: 20rem auto;
+  padding: 1.5rem;
+
 }
+
+
+fieldset input {
+  margin-bottom: 2rem;
+}
+
 
 .map-container {
   margin: 20px auto;
-
 }
 
-
-/* Results */
-
+/* Results page */
+.results-search-container {
+  text-align: center;
+}
 .results-section {
   display: flex;
   flex-wrap: wrap;
   padding: 0;
   justify-content: space-evenly;
-  
+  text-align: center;
+  height: 45rem;
+  overflow: scroll;
 }
 
 .result-card {
-  background-color: azure;
-  width: 9.37rem;
+  background-color: rgba(240, 255, 255, 0.541);
+  width: 26rem;
   font-size: .5em;
   margin-top: 1rem;
   margin: .5rem;
-  overflow:scroll;
+  /* overflow:scroll; */
 }
 
 .result-card img {
-  width: 9.37rem;
-  max-height: 9.37rem;
+  width: 26rem;
+  max-height: 26rem;
 }
 
-footer { 
-  width: 90vw;
-  margin: 40px auto 10px;
+
+
+/* Details */
+.details-top {
+  margin: 2rem auto 0rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.form-container {
+  text-align: center;
+}
+
+
+
+
+/* details page business section */
+
+.rate-it-container {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  text-align: center;
+  background-color: rgba(240, 255, 255, 0.365);
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.business-container {
+  display:flex;
+  flex-direction: row;
+  margin: 0 auto;
+}
+
+
+
+.business-card {
+  background-color: azure;
+  width: 13.37rem;
+  font-size: .5em;
+  margin-top: 1rem;
+  margin: .5rem;
+}
+
+.business-card img {
+  opacity: .75;
+  width: 13.37rem;
+  max-height: 13.37rem;
+}
+
+.category {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  justify-content: space-evenly;
+}
+
+themes {
+  background-color: #33d9b2;
+  background-color: #ff793f;
+  background-color: #f7f1e3;
+  background-color: #aaa69d;
+  background-color: #4E342E;
 }
