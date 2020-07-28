@@ -26,6 +26,7 @@ h3 {
   font-size: 12px;
 }
 
+/* index search container */
 .search-container {
   margin-top: 70px;
   display: flex;
@@ -51,16 +52,20 @@ fieldset input {
 }
 
 /* Results page */
-
+.results-search-container {
+  text-align: center;
+}
 .results-section {
   display: flex;
   flex-wrap: wrap;
   padding: 0;
   justify-content: space-evenly;
+  height: 45rem;
+  overflow: scroll;
 }
 
 .result-card {
-  background-color: azure;
+  background-color: rgba(240, 255, 255, 0.541);
   width: 13.37rem;
   font-size: .5em;
   margin-top: 1rem;
@@ -77,7 +82,7 @@ fieldset input {
 
 /* Details */
 .details-top {
-  margin: 2rem auto;
+  margin: 2rem auto 0rem;
   text-align: center;
   padding: 1rem;
 }
@@ -86,8 +91,55 @@ fieldset input {
   text-align: center;
 }
 
+
+
+
 /* details page business section */
+
+.rate-it-container {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  text-align: center;
+  background-color: rgba(240, 255, 255, 0.365);
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
 .business-container {
+  display:flex;
+  flex-direction: row;
+  margin: 0 auto;
+
+}
+
+.truck_card {
+  /* display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 0;
+  justify-content: space-evenly;
+  overflow: scroll;
+  margin: 2rem; */
+ 
+}
+.groomer_card {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  justify-content: space-evenly;
+}
+
+.vet_card {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  justify-content: space-evenly;
+}
+
+.dayCare_card {
   display: flex;
   flex-wrap: wrap;
   padding: 0;
@@ -95,17 +147,17 @@ fieldset input {
 }
 
 .business-card {
-  background-color: #f7f1e3;
-  width: 9.37rem;
+  background-color: azure;
+  width: 13.37rem;
   font-size: .5em;
   margin-top: 1rem;
   margin: .5rem;
-  overflow: scroll;
 }
 
 .business-card img {
-  width: 9.37rem;
-  max-height: 9.37rem;
+  opacity: .75;
+  width: 13.37rem;
+  max-height: 13.37rem;
 }
 
 themes {

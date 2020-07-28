@@ -10,6 +10,8 @@ body {
 main, footer {
   width: 90vw;
   margin: 70px auto 20px;
+  /* background-color: rgba(240, 255, 255, 0.365); */
+
 }
 
 header {
@@ -17,7 +19,7 @@ header {
   top: 0;
   height: 50px;
   width: 100%;
-  background-color: #33d9b2b6
+  background-color: #33d9b28c
 }
 
 footer {

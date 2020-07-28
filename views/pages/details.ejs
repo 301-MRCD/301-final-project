@@ -12,7 +12,8 @@
   <head>
     <%- include ( '../layout/head' ) %>
   </head>
-  <body>
+
+  <body style="background-image: url('images/fadedPark.png');">
     <header>
       <%- include ( '../layout/header' ) %>
     </header>
@@ -23,27 +24,20 @@
         <p><%= address %></p>
       </div>
 
-      <div class="form-container">
-        <form class="rate-form" method="post" action="/add-ratings">
-          <input type="number" name="rating" placeholder="0-5" />
-          <input
-            type="hidden"
-            name="total_ratings"
-            value="<%= ratings.total_ratings %>"
-          />
-          <input
-            type="hidden"
-            name="total_votes"
-            value="<%= ratings.total_votes %>"
-          />
-          <input type="hidden" name="yelp_id" value="<%= yelp_id %>" />
-          <input type="hidden" name="image_url" value="<%= image_url %>" />
-          <input type="hidden" name="name" value="<%= name %>" />
-          <input type="hidden" name="address" value="<%= address %>" />
-          <button type="submit">Rate it</button>
-          <i class="fas fa-paw"></i>
-        </form>
-      </div>
+      <section>
+        <div class="rate-it-container">
+          <form method="post" action="/add-ratings">
+            <input type="number" name="rating" placeholder="0-5" min="1" max="5" />
+            <input type="hidden" name="total_ratings" value="<%= ratings.total_ratings %>" />
+            <input type="hidden" name="total_votes" value="<%= ratings.total_votes %>" />
+            <input type="hidden" name="yelp_id" value="<%= yelp_id %>" />
+            <input type="hidden" name="image_url" value="<%= image_url %>" />
+            <input type="hidden" name="name" value="<%= name %>" />
+            <input type="hidden" name="address" value="<%= address %>" />
+            <button type="submit">Rate it</button>
+            <i class="fas fa-paw"></i>
+          </form>
+        </div>
 
       <div class="thank_you_message"><h1>Thank you rating!!!</h1></div>
 
@@ -104,5 +98,5 @@
     <footer>
       <%- include ( '../layout/footer' ) %>
     </footer>
-  </body>
+  </body >
 </html>
