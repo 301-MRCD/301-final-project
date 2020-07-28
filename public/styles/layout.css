@@ -1,24 +1,4 @@
-html {
-  box-sizing: border-box;
-  font-size: 62.5%;
-}
 
-body {
-  background-color: #c7ecee;
-}
-
-main, footer {
-  width: 90vw;
-  margin: 70px auto 20px;
-}
-
-header {
-  position: fixed;
-  top: 0;
-  height: 50px;
-  width: 100%;
-  background-color: #33d9b2
-}
 
 nav {
   padding: 1rem 0rem;
@@ -34,8 +14,6 @@ a {
   color: #f7f1e3;
   font-size: 2rem;
 }
-
-@media screen and (max-width: 767px) {}
 
 h1 {
   text-align: center;
@@ -55,19 +33,19 @@ h3 {
   justify-content: center;
   width: 50%;
   text-align: center;
-  background-color: rgba(240, 255, 255, 0.536);
+  background-color: rgba(240, 255, 255, 0.365);
+  margin: 20rem auto;
+  padding: 1.5rem;
+
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 2rem auto;
-}
+
 
 fieldset input {
   margin-bottom: 2rem;
 }
+
+
 .map-container {
   margin: 20px auto;
 }
@@ -95,8 +73,9 @@ fieldset input {
   max-height: 13.37rem;
 }
 
-/* Details */
 
+
+/* Details */
 .details-top {
   margin: 2rem auto;
   text-align: center;
@@ -127,11 +106,6 @@ fieldset input {
 .business-card img {
   width: 9.37rem;
   max-height: 9.37rem;
-}
-
-footer {
-  width: 90vw;
-  margin: 40px auto 10px;
 }
 
 themes {
