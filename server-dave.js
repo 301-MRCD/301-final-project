@@ -253,17 +253,3 @@ client.connect().then(() => {
   app.listen(PORT, () => console.log('Davee\'s server running on port', PORT));
 });
 
-/*
-// 1 -- the initial thing which is the .zip
-// 4 other queries.
-  // 1, then 2, then 3, then 4
-let promises = [];
-promises.push( superagent.get()) // food no .then()
-promises.push( superagent.get()) // vets no .then()
-promises.push( superagent.get()) // cleaners no .then()
-promises.push( superagent.get()) // park itself no .then()
-Promises.all(promises)
-  .then( ([food, vets, cleaning, park]) => {} )
-food.body
-
-*/
