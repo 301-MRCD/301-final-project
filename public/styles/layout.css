@@ -4,8 +4,6 @@ html {
 }
 
 body {
-  /* display: flex; */
-  /* background-color: #f9f5edb3; */
   background-color: #c7ecee;
 }
 
@@ -53,15 +51,28 @@ h3 {
 .search-container {
   margin-top: 70px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  /* border: 1px solid black; */
+  width: 50%;
+  text-align: center;
+  background-color: rgba(240, 255, 255, 0.536);
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 2rem auto;
+}
+
+fieldset input {
+  margin-bottom: 2rem;
+}
 .map-container {
   margin: 20px auto;
 }
 
-/* Results */
+/* Results page */
 
 .results-section {
   display: flex;
@@ -96,6 +107,7 @@ h3 {
   text-align: center;
 }
 
+/* details page business section */
 .business-container {
   display: flex;
   flex-wrap: wrap;
