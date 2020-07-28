@@ -64,7 +64,6 @@ function renderResults(req, res) {
 }
 
 function renderDetail(req, res) {
-  console.log('this is req.body from line 70+++++++++++++++++', req.body);
   let SQL = `SELECT * FROM parks_table WHERE yelp_id=$1`;
   let values = [req.body.yelp_id];
   client
@@ -164,35 +163,18 @@ function makeMultipleAPIcalls(location) {
     limit: 6,
   };
 
-  return superagent
-    .get(API1)
-    .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
-    .query(queryFoodTruck)
-    .then(apiData1 => {
-      return superagent
-        .get(API1)
-        .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
-        .query(queryGroomers)
-        .then(apiData2 => {
-          return superagent
-            .get(API1)
-            .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
-            .query(queryVets)
-            .then(apiData3 => {
-              return superagent
-                .get(API1)
-                .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
-                .query(queryDogDayCare)
-                .then(apiData4 => {
-                  let foodTruckArr = apiData1.body.businesses.map(truck => new FoodTrucks(truck));
-                  let groomersArr = apiData2.body.businesses.map(groomer => new Groomers(groomer));
-                  let vetsArr = apiData3.body.businesses.map(vet => new Vets(vet));
-                  let dogDayCareArr = apiData4.body.businesses.map(dayCare => new DogDayCare(dayCare));
-                  return { foodtruck1: foodTruckArr, groomer1: groomersArr, vets1: vetsArr, dogDayCare1: dogDayCareArr };
-                });
-            });
-        });
-    });
+  let promises = [];
+  promises.push(superagent.get(API1).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).query(queryFoodTruck));
+  promises.push(superagent.get(API1).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).query(queryGroomers));
+  promises.push(superagent.get(API1).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).query(queryVets));
+  promises.push(superagent.get(API1).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).query(queryDogDayCare));
+  return Promise.all(promises).then(([foodtruck, groomers, vets, dogDayCare]) => {
+    let foodTruckArr = foodtruck.body.businesses.map(truck => new FoodTrucks(truck));
+    let groomersArr = groomers.body.businesses.map(groomer => new Groomers(groomer));
+    let vetsArr = vets.body.businesses.map(vet => new Vets(vet));
+    let dogDayCareArr = dogDayCare.body.businesses.map(dayCare => new DogDayCare(dayCare));
+    return { foodtruck1: foodTruckArr, groomer1: groomersArr, vets1: vetsArr, dogDayCare1: dogDayCareArr };
+  });
 }
 
 function FoodTrucks(obj) {
@@ -270,3 +252,18 @@ function handleError(error, res) {
 client.connect().then(() => {
   app.listen(PORT, () => console.log('Davee\'s server running on port', PORT));
 });
+
+/*
+// 1 -- the initial thing which is the .zip
+// 4 other queries.
+  // 1, then 2, then 3, then 4
+let promises = [];
+promises.push( superagent.get()) // food no .then()
+promises.push( superagent.get()) // vets no .then()
+promises.push( superagent.get()) // cleaners no .then()
+promises.push( superagent.get()) // park itself no .then()
+Promises.all(promises)
+  .then( ([food, vets, cleaning, park]) => {} )
+food.body
+
+*/
