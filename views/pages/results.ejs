@@ -12,7 +12,6 @@
         <%- include ( '../layout/header' ) %>
     </header>
    <main>
-        <h1>Dog Park App</h1>
 
         <div class=" results-search-container">
             <form method="get" action="/render-results">
@@ -67,7 +66,7 @@
         // https://stackoverflow.com/questions/16183748/how-to-escape-html-in-node-js-ejs-view/16184093#16184093
         var parkArr = <%- park_arr  %>;
         console.log(parkArr);
-        var location = <%= query  %>;
+        var location = '<%= query  %>';
         $.ajax('https://maps.googleapis.com/maps/api/geocode/json',{
             data:{
                 address: location,
@@ -105,8 +104,8 @@
             var location = {lat:lat, lng:lng};
             var contentString = "<h4>" + parkName + "<h4>";
             var marker = new google.maps.Marker({position: location, map: map, title: parkName});
-            marker.addListener('click', function () {
-                    console.log('click successful on park', parkName);
+                marker.addListener('click', function () {
+                console.log('click successful on park', parkName);
             });
 
             }

@@ -1,30 +1,25 @@
 console.log('Hello App.js works');
-
-
 $('.truck_button').click(() => {
-  $('.groomer_card').hide();
-  $('.vet_car').hide();
-  $('.dayCare_card').hide();
-  $('.truck_card').show();
+  $('.groomer_card').css('display', 'none');
+  $('.vet_car').css('display', 'none');
+  $('.dayCare_card').css('display', 'none');
+  $('.truck_card').css('display', 'grid');
 });
-
 $('.groomers_button').click(() => {
-  $('.truck_card').hide();
-  $('.vet_car').hide();
-  $('.dayCare_card').hide();
-  $('.groomer_card').show();
+  $('.truck_card').css('display', 'none');
+  $('.vet_car').css('display', 'none');
+  $('.dayCare_card').css('display', 'none');
+  $('.groomer_card').css('display', 'grid');
 });
-
 $('.vet_button').click(() => {
-  $('.truck_card').hide();
-  $('.groomer_card').hide();
-  $('.dayCare_card').hide();
-  $('.vet_card').show();
+  $('.truck_card').css('display', 'none');
+  $('.groomer_card').css('display', 'none');
+  $('.dayCare_card').css('display', 'none');
+  $('.vet_card').css('display', 'grid');
 });
-
 $('.dayCare_button').click(() => {
-  $('.truck_card').hide();
-  $('.vet_card').hide();
-  $('.groomer_card').hide();
-  $('.dayCare_card').show();
+  $('.truck_card').css('display', 'none');
+  $('.vet_card').css('display', 'none');
+  $('.groomer_card').css('display', 'none');
+  $('.dayCare_card').css('display', 'grid');
 });
