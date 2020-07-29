@@ -1,33 +1,5 @@
-
-
-nav {
-  padding: 1rem 0rem;
-}
-
-ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin-left: 1rem;
-}
-
-a {
-  color: #f7f1e3;
-  font-size: 2rem;
-}
-
-h1 {
-  text-align: center;
-  font-size: 5rem;
-  margin-bottom: 20px;
-  color: #4E342E;
-}
-
-h3 {
-  font-size: 12px;
-}
-
 /* index search container */
+
 .search-container {
   margin-top: 70px;
   display: flex;
@@ -38,34 +10,31 @@ h3 {
   background-color: rgba(240, 255, 255, 0.365);
   margin: 20rem auto;
   padding: 1.5rem;
-
 }
-
 
 fieldset input {
   margin-bottom: 2rem;
 }
-
 
 .map-container {
   margin: 20px auto;
 }
 
 /* Results page */
+
 .results-search-container {
-  text-align: center;
 }
+
 .results-section {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  justify-content: space-evenly;
-  text-align: center;
-  height: 45rem;
-  overflow: scroll;
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  grid-gap: 2rem;
+
 }
 
 .result-card {
+  justify-self: center;
+  text-align: cent;
   background-color: rgba(240, 255, 255, 0.541);
   width: 26rem;
   font-size: .5em;
@@ -79,9 +48,8 @@ fieldset input {
   max-height: 26rem;
 }
 
-
-
 /* Details */
+
 .details-top {
   margin: 2rem auto 0rem;
   text-align: center;
@@ -91,9 +59,6 @@ fieldset input {
 .form-container {
   text-align: center;
 }
-
-
-
 
 /* details page business section */
 
@@ -110,12 +75,10 @@ fieldset input {
 }
 
 .business-container {
-  display:flex;
+  display: flex;
   flex-direction: row;
   margin: 0 auto;
 }
-
-
 
 .business-card {
   background-color: azure;

@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
  <%- include ( '../layout/head' ) %>
+ <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0kg3D3tRoFiFU7V5h8BWaHlEPY1oGyUU&callback=geocode&libraries=&v=weekly" defer></script>  
+ <script src="https://maps.googleapis.com/maps/api/geocode/json?address=98102&key=AIzaSyCvwxvjpYA_aEgOJNkChbmc-Vxwk4fVf7E"></script>
+
 </head>
 <body style="background-image: url('images/fadedPark.png');">
     <header>
@@ -20,9 +24,9 @@
         </div>
        
         <div class="map-container">
-            <a href="https://placeholder.com"> 
-            <img src="https://via.placeholder.com/334x200?text=map" alt="">
-            </a>
+            <span>
+                <div id="map"></div>
+            </span>
         </div>
     
         <section class="results-section">
@@ -40,7 +44,80 @@
                 </div>
             <%} %>
         </section>
+    
+        <% var query =  searchQuery%> // variable created by ejs
+        <% var park_arr =  JSON.stringify(parkArr)%>
+        <script>
+        //the above lines of EJS allow us to pass through variables into our script tags below.  see notes:
+           var searchQuery = <%= query  %>;  //var query is now assigned to searchQuery which will only work on browsers
+           console.log(searchQuery);  // successfully prints 101 on browser
+        </script>
+
+<script>
+    geocode();
+    function geocode(){
+
+        //NOTE: when declaring park arr, we need to stringify the array of objects.
+        //since EJS will escape HTML, it will convert any "" into '&#34'.
+        //when we declare the parkArr below, we want to use UNESCAPED ejs.
+        //This is accomplished by changing the strawberry '=' to a '-'.
+        //see below sites, accessed in order on 7/28/2020 for train of thought:
+        // https://stackoverflow.com/questions/48626581/cannot-access-the-items-of-the-json-array-declared-in-ejs-inside-javascript-scri
+        // https://stackoverflow.com/questions/37121005/when-i-json-stringifyobject-i-get-a-crazy-string-as-a-value
+        // https://stackoverflow.com/questions/16183748/how-to-escape-html-in-node-js-ejs-view/16184093#16184093
+        var parkArr = <%- park_arr  %>;
+        console.log(parkArr);
+        var location = <%= query  %>;
+        $.ajax('https://maps.googleapis.com/maps/api/geocode/json',{
+            data:{
+                address: location,
+                key: 'AIzaSyD0kg3D3tRoFiFU7V5h8BWaHlEPY1oGyUU'
+            }
+        })
+        .then(function(response){
+            let responseResults = response.results[0];
+            let coordinates = responseResults.geometry.location;
+            console.log(responseResults.geometry.location);
+            var map; //Your map
+
+            // geocoder = new google.maps.Geocoder();
+            //Default setup
+            // var latlng = new google.maps.LatLng(-34.397, 150.644);
+            var myOptions = {
+                zoom: 10,
+                center: coordinates,
+            }
+            map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+            //see below video for logic on inserting map markers, around 8 minute mark:
+            //https://www.youtube.com/watch?v=8NUqDc1bQ84
+            //note, the following two functions MUST be declared inside your ajax call even though
+            //callback functions SHOULD work with asnychronous functions.  Existence is agony.
+
+            for (var park of parkArr){
+                let parkName = park.name;
+                let parkLat = park.lat;
+                let parkLng = park.long;
+                dropPark(parkLat, parkLng, parkName);
+            }
             
+            function dropPark (lat, lng, parkName){
+            var location = {lat:lat, lng:lng};
+            var contentString = "<h4>" + parkName + "<h4>";
+            var marker = new google.maps.Marker({position: location, map: map, title: parkName});
+            marker.addListener('click', function () {
+                    console.log('click successful on park', parkName);
+            });
+
+            }
+        }
+        )
+        .catch(function(error){
+            console.log(error);
+        })
+    
+    }
+</script>
     </main>
     <footer>
         <%- include ( '../layout/footer' ) %>
