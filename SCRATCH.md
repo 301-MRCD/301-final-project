@@ -1,0 +1,1 @@
+            var parkArr = <%= park_arr  %>;

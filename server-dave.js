@@ -44,6 +44,7 @@ function handleHome(req, res) {
 function renderResults(req, res) {
   const searchQuery = req.query.searchQuery;
   const API = `https://api.yelp.com/v3/businesses/search`;
+  // console.log('this is searchQuery++++++++++++++++++++++++')
 
   let queryObject = {
     categories: 'dog_parks',
@@ -57,15 +58,17 @@ function renderResults(req, res) {
     .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
     .query(queryObject)
     .then(obj => {
-      let apiData = obj.body.businesses.map(park => new Park(park));
-      res.status(200).render('pages/results', { parkArr: apiData });
+      // console.log('this is business OBJ++++++++++++++++++++++++', obj.body.businesses);
+      let apiData = obj.body.businesses.map(park => new Park(park))
+      // res.status(200).json(apiData);
+      res.status(200).render('pages/results', { parkArr: apiData, searchQuery: searchQuery});
     })
     .catch(error => handleError(error, res));
 }
 
 
 function renderDetail(req, res) {
-  console.log('this is req.body from line 70+++++++++++++++++', req.body);
+  // console.log('this is req.body from line 70+++++++++++++++++', req.body);
   let SQL = `SELECT * FROM parks_table WHERE yelp_id=$1`;
   let values = [req.body.yelp_id];
   client

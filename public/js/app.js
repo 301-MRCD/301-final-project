@@ -1,3 +1,4 @@
+"use strict";
 console.log('Hello App.js works');
 
 
@@ -28,3 +29,15 @@ $('.dayCare_button').click(() => {
   $('.groomer_card').hide();
   $('.dayCare_card').show();
 });
+
+//
+// let map;
+
+// function initMap() {
+
+//     var mapProp = {
+//         center:new google.maps.LatLng(51.508742,-0.120850),
+//         zoom:5,
+//     };
+    
+// map = new google.maps.Map(document.getElementById("map"), mapProp);
