@@ -8,7 +8,7 @@
   width: 50%;
   text-align: center;
   background-color: rgba(240, 255, 255, 0.365);
-  margin: 20rem auto;
+  margin: 15rem auto;
   padding: 1.5rem;
 }
 
@@ -22,30 +22,31 @@ fieldset input {
 
 /* Results page */
 
-.results-search-container {
-}
+.results-search-container {}
 
 .results-section {
-  display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-gap: 2rem;
-
 }
 
 .result-card {
   justify-self: center;
-  text-align: cent;
+  text-align: center;
   background-color: rgba(240, 255, 255, 0.541);
-  width: 26rem;
+  width: 20rem;
   font-size: .5em;
   margin-top: 1rem;
   margin: .5rem;
+  font-size: 1.5rem;
+  border-radius: 5px 5px 5px 5px;
   /* overflow:scroll; */
 }
 
 .result-card img {
-  width: 26rem;
+  width: 100%;
   max-height: 26rem;
+  border-radius: 5px 5px 0px 0px;
 }
 
 /* Details */
@@ -74,10 +75,12 @@ fieldset input {
   padding: 1.5rem;
 }
 
-.business-container {
-  display: flex;
-  flex-direction: row;
-  margin: 0 auto;
+.category {
+  width: 95%;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+  grid-gap: 2rem;
 }
 
 .business-card {
@@ -86,6 +89,7 @@ fieldset input {
   font-size: .5em;
   margin-top: 1rem;
   margin: .5rem;
+  justify-self: center;
 }
 
 .business-card img {
@@ -94,12 +98,8 @@ fieldset input {
   max-height: 13.37rem;
 }
 
-.category {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  justify-content: space-evenly;
-}
+
+
 
 themes {
   background-color: #33d9b2;
