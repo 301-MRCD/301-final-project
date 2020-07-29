@@ -30,10 +30,10 @@
     
         <section class="results-section">
             <% for(var park of parkArr){ %>
-                <div id="<%= park.name %>div"class="result-card">
+                <div id="<%= park.name %>div" class="result-card">
                     <img src="<%= park.image_url %>" width="200px" >
                     <h2> <%= park.name %> </h2>
-                    <form id="<%= park.name %>"class="location-form" method="post" action="/render-details"> 
+                    <form id="<%= park.name %>" class="location-form" method="post" action="/render-details"> 
                         <input type="hidden" name="image_url" value="<%= park.image_url %>">
                         <input type="hidden" name="name" value="<%= park.name %>">
                         <input type="hidden" name="address" value="<%= park.address %>">
@@ -60,7 +60,7 @@
         // https://stackoverflow.com/questions/48626581/cannot-access-the-items-of-the-json-array-declared-in-ejs-inside-javascript-scri
         // https://stackoverflow.com/questions/37121005/when-i-json-stringifyobject-i-get-a-crazy-string-as-a-value
         // https://stackoverflow.com/questions/16183748/how-to-escape-html-in-node-js-ejs-view/16184093#16184093
-        var parkArr = <%- park_arr  %>;
+        var parkArr = <%- park_arr %>;
         console.log(parkArr);
         var location = '<%= query  %>';
         $.ajax('https://maps.googleapis.com/maps/api/geocode/json',{
