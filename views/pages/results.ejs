@@ -4,7 +4,6 @@
  <%- include ( '../layout/head' ) %>
  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0kg3D3tRoFiFU7V5h8BWaHlEPY1oGyUU&callback=geocode&libraries=&v=weekly" defer></script>  
- <script src="https://maps.googleapis.com/maps/api/geocode/json?address=98102&key=AIzaSyCvwxvjpYA_aEgOJNkChbmc-Vxwk4fVf7E"></script>
 
 </head>
 <body style="background-image: url('images/fadedPark.png');">
@@ -38,6 +37,8 @@
                         <input type="hidden" name="name" value="<%= park.name %>">
                         <input type="hidden" name="address" value="<%= park.address %>">
                         <input type="hidden" name="yelp_id" value="<%=park.yelp_id%>">
+                        <input type="hidden" name="lat" value ="<%= park.lat %>">
+                        <input type="hidden" name="long" value ="<%= park.long %>">
                         <!-- <button type="submit">More Details</button> -->
                     </form>
                 </div>
@@ -72,7 +73,7 @@
         .then(function(response){
             let responseResults = response.results[0];
             let coordinates = responseResults.geometry.location;
-            console.log(responseResults.geometry.location);
+            console.log('this is coordinates:', responseResults.geometry.location);
             var map; //Your map
 
             // geocoder = new google.maps.Geocoder();
