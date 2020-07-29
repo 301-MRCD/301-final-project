@@ -71,6 +71,7 @@ function renderResults(req, res) {
 }
 
 function renderDetail(req, res) {
+  console.log('this is req.body from line 74+++++++++', req.body);
   let SQL = `SELECT * FROM parks_table WHERE yelp_id=$1`;
   let values = [req.body.yelp_id];
   client
@@ -118,9 +119,11 @@ function addRatings(req, res) {
 ///////////////////////////////////////////
 function helpRenderDetails(req, res, psqlResults) {
   makeMultipleAPIcalls(req.body.address).then(APIresult => {
-    console.log('APIresult from line 120++++++++++++++++++++++++++++', APIresult);
     let average = psqlResults.rows[0].total_ratings / psqlResults.rows[0].total_votes || 0;
+    console.log('this is req.body.lat from 123+++++++++', req.body.lat);
     res.status(200).render('pages/details', {
+      lat: req.body.lat,
+      lng: req.body.long,
       ratings: psqlResults.rows[0],
       average1: average,
       image_url: req.body.image_url,
