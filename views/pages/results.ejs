@@ -21,8 +21,8 @@
             </form>
         </div>
        
-        
-        <div class="map-container">
+
+        <div class="map-container result-map">
             <span>
                 <div id="map"></div>
             </span>
@@ -34,14 +34,17 @@
                     <img src="<%= park.image_url %>" width="200px" >
                     <h2> <%= park.name %> </h2>
                     <form id="<%= park.name %>" class="location-form" method="post" action="/render-details"> 
-                        <input type="hidden" name="image_url" value="<%= park.image_url %>">
-                        <input type="hidden" name="name" value="<%= park.name %>">
-                        <input type="hidden" name="address" value="<%= park.address %>">
-                        <input type="hidden" name="yelp_id" value="<%=park.yelp_id%>">
-                        <input type="hidden" name="lat" value ="<%= park.lat %>">
-                        <input type="hidden" name="long" value ="<%= park.long %>">
-                        <!-- <button type="submit">More Details</button> -->
-                    </form>
+                        <fieldset>
+
+                            <input type="hidden" name="image_url" value="<%= park.image_url %>">
+                            <input type="hidden" name="name" value="<%= park.name %>">
+                            <input type="hidden" name="address" value="<%= park.address %>">
+                            <input type="hidden" name="yelp_id" value="<%=park.yelp_id%>">
+                            <input type="hidden" name="lat" value ="<%= park.lat %>">
+                            <input type="hidden" name="long" value ="<%= park.long %>">
+                            <!-- <button type="submit">More Details</button> -->
+                        </fieldset>
+                        </form>
                 </div>
             <%} %>
         </section>

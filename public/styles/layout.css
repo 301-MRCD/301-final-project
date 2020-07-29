@@ -23,7 +23,11 @@ fieldset input {
 /* Results page */
 
 .results-search-container {
-  padding-top: 3rem;
+  padding-top: 2rem;
+}
+
+.results-search-container fieldset input {
+  margin-bottom: 1rem;
 }
 
 .results-section {
@@ -62,7 +66,7 @@ fieldset input {
 }
 
 .details-top img {
-  width: 20rem;
+  width: 18rem;
   max-height: 18rem;
 }
 
