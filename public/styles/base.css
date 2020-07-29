@@ -1,18 +1,25 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+  background-size: auto;
+
 }
 
 body {
-  background-image: url("images/fadedPark.png");
-  background-color: #c7ecee;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: gray;
+  /* background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); */
+  /* background-color: #c7ecee; */
 }
 
 main, footer {
-  width: 90vw;
+  width: 96vw;
   margin: 70px auto 20px;
   /* background-color: rgba(240, 255, 255, 0.365); */
-
 }
 
 header {
@@ -20,11 +27,7 @@ header {
   top: 0;
   height: 6rem;
   width: 100%;
-  background-color: #33d9b26e
-}
-
-h3{
-  margin-top: auto;
+  background-color: #33d9b2
 }
 
 footer {
@@ -33,6 +36,36 @@ footer {
   width: 90vw;
   /* margin: 40px auto 10px; */
   flex-shrink: 0
+}
+
+nav {
+  padding: 1rem 0rem;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 1rem;
+}
+
+a {
+  color: #f7f1e3;
+  font-size: 2rem;
+}
+
+h1 {
+  text-align: center;
+  font-size: 5rem;
+  margin-bottom: 20px;
+  color: #4E342E;
+}
+
+h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: white;
+  margin-top: auto;
 }
 
 themes {
