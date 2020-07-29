@@ -9,7 +9,6 @@ const superagent = require('superagent');
 const pg = require('pg');
 const cors = require('cors');
 const morgan = require('morgan');
-// const axios = require('axios');
 const client = new pg.Client(process.env.DATABASE_URL);
 const app = express();
 const PORT = process.env.PORT;
@@ -26,12 +25,10 @@ app.use(override('_method'));
 // ROUTES
 // ---------------------------------------------
 app.get('/', handleHome);
-app.get('/render-about', renderAbout);
 app.get('/render-results', renderResults);
-// app.get('/render-maps', renderMap);
 app.post('/render-details', renderDetail);
 app.post('/add-ratings', addRatings);
-
+app.get('/render-about', renderAbout);
 
 app.use('*', handleNotFound);
 app.use(handleError);
@@ -41,17 +38,14 @@ app.use(handleError);
 // ----------------------------------------------
 
 function handleHome(req, res) {
-  // axios.get('https://maps.googleapis.com/maps/api/js?key='+process.env.GOOGLE_API_KEY+'&callback=initMap')
-  //   .then(result => {
-  //     res.send(result.data);
-  //   })
-  res.status(200).render('pages/index')
-    .catch((error) => handleError(error, res));
+  res.status(200).render('pages/index');
 }
-function renderAbout(req, res) {
 
-  res.status(200).render('pages/about')
-    .catch((error) => handleError(error, res));
+function renderAbout(req, res) {
+  res
+    .status(200)
+    .render('pages/about')
+    .catch(error => handleError(error, res));
 }
 
 function renderResults(req, res) {
@@ -62,64 +56,44 @@ function renderResults(req, res) {
     categories: 'dog_parks',
     sort_by: 'distance',
     location: searchQuery,
-    limit: 20,
+    limit: 10,
   };
 
   superagent
     .get(API)
     .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)
     .query(queryObject)
-    .then((obj) => {
-      let apiData = obj.body.businesses.map((park) => new Park(park));
-      renderMap(req, res);
-      res.status(200).render('pages/results', { parkArr: apiData });
+    .then(obj => {
+      let apiData = obj.body.businesses.map(park => new Park(park));
+      res.status(200).render('pages/results', { parkArr: apiData, searchQuery: searchQuery});
     })
-
-    .catch((error) => handleError(error, res));
+    .catch(error => handleError(error, res));
 }
 
 function renderDetail(req, res) {
   let SQL = `SELECT * FROM parks_table WHERE yelp_id=$1`;
-  // let SQL = `SELECT yelp_id, park_name, sum(total_ratings/total_votes) as avg_rating FROM parks_table WHERE yelp_id=$1 ORDER BY avg DESC;`;
   let values = [req.body.yelp_id];
   client
     .query(SQL, values)
-    .then((results) => {
+    .then(results => {
       if (results.rowCount === 0) {
-        createParkRating(req.body.yelp_id, req.body.name, res, req.body.image_url, req.body.address);
+        createParkRating(req, res);
       } else {
-        let average =results.rows[0].total_ratings / results.rows[0].total_votes || 0;
-        res.status(200).render('pages/details', {
-          ratings: results.rows[0],
-          average1: average,
-          image_url: req.body.image_url,
-          name: req.body.name,
-          address: req.body.address,
-          yelp_id: req.body.yelp_id
-        });
+        helpRenderDetails(req, res, results);
       }
     })
-    .catch((error) => handleError(error, res));
+    .catch(error => handleError(error, res));
 }
 
-function createParkRating(yelp_id, park_name, res, imageurl, address) {
+function createParkRating(req, res) {
   let SQL = `INSERT INTO parks_table (yelp_id, park_name, total_ratings, total_votes)  VALUES ($1, $2, $3, $4) RETURNING *;`;
-  let safequery = [yelp_id, park_name, 0, 0];
+  let safequery = [req.body.yelp_id, req.body.name, 0, 0];
   client
     .query(SQL, safequery)
-    .then((results) => {
-      let average =
-        results.rows[0].total_ratings / results.rows[0].total_votes || 0;
-      res.status(200).render('pages/details', {
-        ratings: results.rows[0],
-        average1: average,
-        image_url: imageurl,
-        name: park_name,
-        yelp_id: yelp_id,
-        address: address
-      });
+    .then(results => {
+      helpRenderDetails(req, res, results);
     })
-    .catch((error) => handleError(error, res));
+    .catch(error => handleError(error, res));
 }
 
 function addRatings(req, res) {
@@ -134,45 +108,139 @@ function addRatings(req, res) {
   client
     .query(SQL, params)
     .then(results => {
-      let average =results.rows[0].total_ratings / results.rows[0].total_votes || 0;
-      res.status(200).render('pages/details', {
-        ratings: results.rows[0],
-        average1: average,
-        image_url: req.body.image_url,
-        name: req.body.name,
-        address: req.body.address,
-        yelp_id: req.body.yelp_id
-      });
+      console.log('ratings have been added to database', results.rows);
+      helpRenderDetails(req, res, results);
+      // res.status(200);
+    })
+    .catch(error => handleError(error, res));
+}
+
+///////////////////////////////////////////
+function helpRenderDetails(req, res, psqlResults) {
+  makeMultipleAPIcalls(req.body.address).then(APIresult => {
+    console.log('APIresult from line 120++++++++++++++++++++++++++++', APIresult);
+    let average = psqlResults.rows[0].total_ratings / psqlResults.rows[0].total_votes || 0;
+    res.status(200).render('pages/details', {
+      ratings: psqlResults.rows[0],
+      average1: average,
+      image_url: req.body.image_url,
+      name: req.body.name,
+      address: req.body.address,
+      yelp_id: req.body.yelp_id,
+      foodTruckArr: APIresult.foodtruck1,
+      groomersArr: APIresult.groomer1,
+      vetsArr: APIresult.vets1,
+      dogDayCareArr: APIresult.dogDayCare1,
     });
+  });
 }
 
-function renderMap(req, res){
-// // const API =  https://www.google.com/maps/embed/v1/search?key=GOOGLE_API_KEY&q=record+stores+in+Seattle
-//   //this function needs to take in the user's search location and return a map of the area with all the parks rendered on the map.  This will be on the results page
-//   const searchQuery = req.query.searchQuery;
-//   console.log('searchQuery from renderMap++++++++++++++++++++++', searchQuery);
-//   const API = `https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&GOOGLE_API_KEY`;
-//   let queryObject = {
-//     GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
-//     // callback: 'initMap',
-//     // query: '47.608013, -122.335167',
-//     // type: 'park',
-//     // keyword: 'dog'
-//   };
-//   console.log('this is the queryObject from line 144+++++++++++++++++++++', queryObject)
+function makeMultipleAPIcalls(location) {
+  let API1 = 'https://api.yelp.com/v3/businesses/search';
 
-//   superagent
-//     .get(API)
-//     .query(queryObject)
-//     .then((obj)=>{
-//       let googleApiData = obj;
-//       console.log('googleapidata obj.body line 156+++++++++++++++++++++', googleApiData);
+  let queryFoodTruck = {
+    term: 'food truck',
+    category: 'restaurant',
+    location: location,
+    sort_by: 'distance',
+    limit: 6,
+  };
 
-//     });
-//   //we need to pass in both the user's search queried location, and also the locations of all the parks that are returned by the Yelp API
+  let queryGroomers = {
+    term: 'groomers',
+    category: 'petservices,All',
+    location: location,
+    sort_by: 'distance',
+    limit: 6,
+  };
 
+  let queryVets = {
+    term: 'veterinarians',
+    category: 'vet,All',
+    location: location,
+    sort_by: 'distance',
+    limit: 6,
+  };
 
+  let queryDogDayCare = {
+    term: 'dog daycare',
+    category: 'petservices,All',
+    location: location,
+    sort_by: 'distance',
+    limit: 6,
+  };
+
+  let promises = [];
+  promises.push(superagent.get(API1).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).query(queryFoodTruck));
+  promises.push(superagent.get(API1).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).query(queryGroomers));
+  promises.push(superagent.get(API1).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).query(queryVets));
+  promises.push(superagent.get(API1).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).query(queryDogDayCare));
+  return Promise.all(promises).then(([foodtruck, groomers, vets, dogDayCare]) => {
+    let foodTruckArr = foodtruck.body.businesses.map(truck => new FoodTrucks(truck));
+    let groomersArr = groomers.body.businesses.map(groomer => new Groomers(groomer));
+    let vetsArr = vets.body.businesses.map(vet => new Vets(vet));
+    let dogDayCareArr = dogDayCare.body.businesses.map(dayCare => new DogDayCare(dayCare));
+    return { foodtruck1: foodTruckArr, groomer1: groomersArr, vets1: vetsArr, dogDayCare1: dogDayCareArr };
+  });
 }
+
+function FoodTrucks(obj) {
+  this.food_truck_name = obj.name || 'NAME NOT AVAILABLE';
+  this.food_truck_image_url = obj.image_url || 'https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483296.jpg';
+  this.food_truck_url = obj.url || 'URL NOT AVAIALABLE';
+  this.food_truck_address = obj.location.display_address[0] + ' ' + (obj.location.display_address[1] || '');
+  this.food_truck_phone = obj.display_phone || 'PHONE NUMBER NOT AVAILABLE';
+}
+
+function Groomers(obj) {
+  this.groomers_name = obj.name || 'NAME NOT AVAILABLE';
+  this.groomers_image_url = obj.image_url || 'https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483296.jpg';
+  this.groomers_url = obj.url || 'URL NOT AVAIALABLE';
+  this.groomers_address = obj.location.display_address[0] + ' ' + (obj.location.display_address[1] || '');
+  this.groomers_phone = obj.display_phone || 'PHONE NUMBER NOT AVAILABLE';
+}
+
+function Vets(obj) {
+  this.vets_name = obj.name || 'NAME NOT AVAILABLE';
+  this.vets_image_url = obj.image_url || 'https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483296.jpg';
+  this.vets_url = obj.url || 'URL NOT AVAIALABLE';
+  this.vets_address = obj.location.display_address[0] + ' ' + (obj.location.display_address[1] || '');
+  this.vets_phone = obj.display_phone || 'PHONE NUMBER NOT AVAILABLE';
+}
+
+function DogDayCare(obj) {
+  this.dog_dayCare_name = obj.name || 'NAME NOT AVAILABLE';
+  this.dog_dayCare_image_url = obj.image_url || 'https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483296.jpg';
+  this.dog_dayCare_url = obj.url || 'URL NOT AVAIALABLE';
+  this.dog_dayCare_address = obj.location.display_address[0] + ' ' + (obj.location.display_address[1] || '');
+  this.dog_dayCare_phone = obj.display_phone || 'PHONE NUMBER NOT AVAILABLE';
+}
+
+// ----------------------------------------------
+// CONSTRUCTORS
+// ----------------------------------------------
+
+function Park(obj) {
+  //api data
+  this.yelp_id = obj.id;
+  this.name = obj.name || 'NAME NOT AVAILABLE';
+  this.image_url = obj.image_url || 'https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483296.jpg';
+  this.address = obj.location.display_address[0] + ' ' + (obj.location.display_address[1] || '');
+  this.lat = obj.coordinates.latitude;
+  this.long = obj.coordinates.longitude;
+  // //db data
+  // this.ratings = '';
+  // this.dogsize = '';
+  // this.washStation = '';
+  // this.trails = '';
+  // this.water = '';
+  // this.description = '';
+}
+
+
+// ----------------------------------------------
+// Error Handlers
+// ----------------------------------------------
 
 function handleNotFound(req, res) {
   res.status(404).send('Could Not Find What You Asked For');
@@ -185,36 +253,10 @@ function handleError(error, res) {
 }
 
 // ----------------------------------------------
-// CONSTRUCTORS
-// ----------------------------------------------
-
-function Park(obj) {
-  //api data
-  this.yelp_id = obj.id;
-  this.name = obj.name;
-  this.image_url = obj.image_url;
-  this.address = obj.location.display_address;
-  this.lat = obj.coordinates.latitude;
-  this.long = obj.coordinates.longitude;
-  // //db data
-  // this.ratings = '';
-  // this.dogsize = '';
-  // this.washStation = '';
-  // this.trails = '';
-  // this.water = '';
-  // this.description = '';
-}
-// ----------------------------------------------
 // CONNECT
 // ----------------------------------------------
 
-//app.listen(process.env.PORT, () => console.log(`Server is running on ${process.env.PORT}`));
+client.connect().then(() => {
+  app.listen(PORT, () => console.log('Davee\'s server running on port', PORT));
+});
 
-client
-  .connect()
-  .then(() => {
-    app.listen(PORT, () => console.log('server running on port', PORT));
-  })
-  .catch((err) => {
-    throw `PG startuperror: ${err.message}`;
-  });

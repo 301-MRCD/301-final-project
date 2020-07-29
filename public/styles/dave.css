@@ -1,0 +1,36 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  height: 100%;
+  background-size: auto;
+  background-repeat: no-repeat;
+  background: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)) fixed;
+}
+
+body {
+  text-align: center;
+}
+
+header {
+  height: 8vh;
+  background-color: white;
+  width: 90%;
+  margin: 2rem auto;
+  border-radius: 1rem;
+}
+
+footer {
+  width: 90%;
+  /* position: fixed;
+  bottom: 0;
+  left: 5%; */
+  height: 8vh;
+  background-color: white;
+  margin: 2rem auto;
+  border-radius: 1rem;
+}
+
+main {
+  margin-bottom: 6vh;
+  min-height: 69vh;
+}
