@@ -6,7 +6,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0kg3D3tRoFiFU7V5h8BWaHlEPY1oGyUU&callback=initMap&libraries=&v=weekly" defer></script>
   </head>
 
-  <body style="background-image: url('images/fadedPark.png');">
+  <body>
     <header>
       <%- include ( '../layout/header' ) %>
     </header>
@@ -21,6 +21,7 @@
         <img src="<%= image_url%>" width="200px" />
         <h2><%= name %></h2>
         <p><%= address %></p>
+        <p> <%= average1 %></p>
       </div>
 
       <div class="rate-it-container">

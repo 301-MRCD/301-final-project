@@ -4,7 +4,8 @@ body {
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
-  background-color: gray;
+  background-color: white;
+  /* background-color: gray; */
   /* background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); */
   /* background-color: #c7ecee; */
 }
@@ -12,15 +13,18 @@ body {
 main, footer {
   width: 96vw;
   margin: 70px auto 20px;
-  /* background-color: rgba(240, 255, 255, 0.365); */
+
 }
 
 header {
+  display: flex;
+  align-items: center;
   position: fixed;
   top: 0;
-  height: 6rem;
+  height: 5rem;
   width: 100%;
-  background-color: #33d9b2
+  background-color: #33d9b2;
+  z-index: 2;
 }
 
 footer {
@@ -41,7 +45,7 @@ nav {
 ul {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   margin-left: 1rem;
 }
 
@@ -50,10 +54,13 @@ a {
   font-size: 1rem;
 }
 
+li a img {
+  padding-right: .5rem;
+}
 h1 {
   text-align: center;
   font-size: 3rem;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   color: #4E342E;
 }
 
@@ -96,3 +103,5 @@ themes {
   margin-right: auto;
   width: 70%;
 }
+
+
