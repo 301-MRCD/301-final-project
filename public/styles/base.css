@@ -5,6 +5,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
   background-color: white;
+  font-family: 'Hind Siliguri', sans-serif;
   /* background-color: gray; */
   /* background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); */
   /* background-color: #c7ecee; */
@@ -51,12 +52,12 @@ ul {
 }
 
 a {
-  color: rgba(0, 0, 0, 0.529);
+  color: rgb(0, 0, 0);
   font-size: 1rem;
 }
 
 b {
-  font-family: 'Hind Siliguri', sans-serif;;
+  font-family: 'Hind Siliguri', sans-serif;
   font-weight: 500;
   font-size: 1rem;
 }
@@ -88,8 +89,6 @@ h3 {
   padding-bottom: -2rem;
 }
 
-
-
 h4 {
   text-align: center;
   font-size: 1rem;
@@ -104,35 +103,6 @@ themes {
   background-color: #aaa69d;
   background-color: #4E342E;
 }
-/* .team div {
-  width: 20%;
-  height: 80%;
-  padding-top: 40%;
-  padding: 2%;
-  background-position: top;
-  float:left;
-  margin:10% 5px 5px 0;
-  background-color: lightcoral;
-  border-radius: 10%;
-  } */
-/* .team h2 {
-  font-size: larger ;
-  font-weight: bold;
-  color: darkblue;
-  text-align: center;
-}
-
-.team img {
-  align-self: center;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
-} */
-/* .team section {
-  display: flex;
-  justify-content: center;
-} */
 
 .about-section {
   display: grid;

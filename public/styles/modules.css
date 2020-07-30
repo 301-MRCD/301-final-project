@@ -23,10 +23,15 @@
 }
 
 
-
+button {
+  border-radius: 44px 44px 44px 44px;
+  height: 1.75rem;
+  font-family: 'Hind Siliguri', sans-serif;
+  background-color: rgba(255, 255, 255, 0.68);
+}
 
 button:hover {
-	background-color:#DCF1EE;
+	background-color:#dcf1ee8e;
 }
 button:active {
 	position:relative;

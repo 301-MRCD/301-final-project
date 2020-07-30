@@ -7,14 +7,20 @@
   justify-content: center;
   width: 50%;
   text-align: center;
-  background-color: rgba(240, 255, 255, 0.365);
+  /* background-color: rgba(240, 255, 255, 0.365); */
   margin: 15rem auto;
   padding: 1.5rem;
 }
 
 
 fieldset input {
+  border-radius: 44px 44px 44px 44px;
   margin-bottom: 2rem;
+  text-align: center;
+  /* opacity:85; */
+  height: 1.5rem;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.584);
 }
 
 .map-container {
@@ -46,7 +52,7 @@ fieldset input {
   font-size: .5em;
   margin-top: 1rem;
   margin: .5rem;
-  padding-bottom: .25rem;
+  padding-bottom: -2rem;
   font-size: 1.5rem;
   /* border-radius: 0px 0px 1px 1px; */
   /* overflow:scroll; */
@@ -55,6 +61,7 @@ fieldset input {
 .result-card img {
   width: 100%;
   max-height: 18rem;
+  padding-bottom: .25rem;
   /* border-radius: 1px 1px 0px 0px; */
 }
 
@@ -80,6 +87,7 @@ fieldset input {
 .rate-it-container {
   margin-top: 70px;
   display: flex;
+  align-items: center;
   /* flex-direction: row; */
   justify-content: center;
   width: 20rem;
@@ -87,6 +95,14 @@ fieldset input {
   background-color: rgba(240, 255, 255, 0.365);
   margin: 0 auto;
   padding: .5rem;
+}
+
+.business-buttons-container {
+  padding-top: 1rem;
+  margin-bottom: -1rem;
+}
+.business-buttons {
+  padding-top:1rem
 }
 
 .category {

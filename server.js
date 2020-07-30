@@ -231,15 +231,7 @@ function Park(obj) {
   this.address = obj.location.display_address[0] + ' ' + (obj.location.display_address[1] || '');
   this.lat = obj.coordinates.latitude;
   this.long = obj.coordinates.longitude;
-  // //db data
-  // this.ratings = '';
-  // this.dogsize = '';
-  // this.washStation = '';
-  // this.trails = '';
-  // this.water = '';
-  // this.description = '';
 }
-
 
 // ----------------------------------------------
 // Error Handlers
@@ -260,6 +252,6 @@ function handleError(error, res) {
 // ----------------------------------------------
 
 client.connect().then(() => {
-  app.listen(PORT, () => console.log('Davee\'s server running on port', PORT));
+  app.listen(PORT, () => console.log('Server running on port', PORT));
 });
 
