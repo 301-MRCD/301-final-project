@@ -3,7 +3,7 @@
 <head>
  <%- include ( '../layout/head' ) %>
  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0kg3D3tRoFiFU7V5h8BWaHlEPY1oGyUU&callback=geocode&libraries=&v=weekly" defer></script>  
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvwxvjpYA_aEgOJNkChbmc-Vxwk4fVf7E&callback=geocode&libraries=&v=weekly" defer></script>  
 
 </head>
 <body>
@@ -72,7 +72,7 @@
         $.ajax('https://maps.googleapis.com/maps/api/geocode/json',{
             data:{
                 address: location,
-                key: 'AIzaSyD0kg3D3tRoFiFU7V5h8BWaHlEPY1oGyUU'
+                key: 'AIzaSyCvwxvjpYA_aEgOJNkChbmc-Vxwk4fVf7E'
             }
         })
         .then(function(response){
