@@ -56,8 +56,9 @@ a {
 }
 
 b {
-  font-weight: bold;
-  font-size: 1.2rem;
+  font-family: 'Hind Siliguri', sans-serif;;
+  font-weight: 500;
+  font-size: 1rem;
 }
 p {
   font-size: .8rem;
@@ -66,6 +67,7 @@ li a img {
   padding-right: .5rem;
 }
 h1 {
+  font-family: 'Hind Siliguri', sans-serif;;
   text-align: center;
   font-size: 3rem;
   /* margin-bottom: 20px; */
@@ -73,15 +75,20 @@ h1 {
 }
 
 h2 {
-  /* padding-top: .15rem; */
-  padding-bottom: .15rem;
-}
-h3 {
-  text-align: center;
+  font-family: 'Hind Siliguri', sans-serif;;
   font-size: 1rem;
-  color: black;
-  margin-top: auto;
+  /* padding-top: .15rem; */
+  padding-bottom: .75rem;
 }
+
+h3 {
+  font-family: 'Hind Siliguri', sans-serif;;
+  font-size: 1rem;
+  padding-top: .5rem;
+  padding-bottom: -2rem;
+}
+
+
 
 h4 {
   text-align: center;
@@ -97,7 +104,7 @@ themes {
   background-color: #aaa69d;
   background-color: #4E342E;
 }
-.team div {
+/* .team div {
   width: 20%;
   height: 80%;
   padding-top: 40%;
@@ -107,8 +114,8 @@ themes {
   margin:10% 5px 5px 0;
   background-color: lightcoral;
   border-radius: 10%;
-  }
-.team h2 {
+  } */
+/* .team h2 {
   font-size: larger ;
   font-weight: bold;
   color: darkblue;
@@ -121,6 +128,53 @@ themes {
   margin-left: auto;
   margin-right: auto;
   width: 70%;
+} */
+/* .team section {
+  display: flex;
+  justify-content: center;
+} */
+
+.about-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  /* grid-gap: 1rem; */
+  margin: 1rem auto;
+  padding-top: 1rem
+}
+
+
+.team-member-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* justify-self: center; */
+  text-align: center;
+  background-color: #80cbc3b3;
+  width: 18rem;
+  height: 18rem;
+  font-size: .5em;
+  /* margin-top: 1rem; */
+  margin: .5rem;
+  padding-bottom: .25rem;
+  font-size: 1.5rem;
+  margin: .5rem auto
+  /* border-radius: 0px 0px 1px 1px; */
+  /* overflow:scroll; */
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+}
+.team-member-card img {
+  width: 100px;
+  max-height: 100px;
+  margin: 0 auto;
+  /* border-radius: 1px 1px 0px 0px; */
+}
+
+.team-info {
+  display: inline-block
 }
 
 

@@ -26,7 +26,7 @@
 
 
 button:hover {
-	background-color:#5cbf2a;
+	background-color:#DCF1EE;
 }
 button:active {
 	position:relative;
@@ -37,7 +37,10 @@ button:active {
 #result-map {
   padding-top: 0rem;
 }
-.map-container {
+.details-map-container {
+  padding-top: 4rem;
+}
+.result-map {
   padding-top: 3.5rem;
 }
 #map {
