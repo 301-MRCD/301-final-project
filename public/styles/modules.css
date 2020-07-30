@@ -23,10 +23,15 @@
 }
 
 
-
+button {
+  border-radius: 44px 44px 44px 44px;
+  height: 1.75rem;
+  font-family: 'Hind Siliguri', sans-serif;
+  background-color: rgba(255, 255, 255, 0.68);
+}
 
 button:hover {
-	background-color:#5cbf2a;
+	background-color:#dcf1ee8e;
 }
 button:active {
 	position:relative;
@@ -37,7 +42,10 @@ button:active {
 #result-map {
   padding-top: 0rem;
 }
-.map-container {
+.details-map-container {
+  padding-top: 4rem;
+}
+.result-map {
   padding-top: 3.5rem;
 }
 #map {
