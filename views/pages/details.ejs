@@ -24,9 +24,9 @@
       </div>
       
       <div class="rate-it-container">
-        <p> <%= average1 %> Stars, <%= ratings.total_votes %> Votes  </p>
+        <p> <%= average1 %> <i class="fa fa-star" aria-hidden="true"></i> <%= ratings.total_votes %> <i class="fa fa-user" aria-hidden="true"></i> </p>
         <form method="post" action="/add-ratings">
-          <input type="number" name="rating" placeholder="0-5" min="1" max="5" />
+          <input class="rating-input" type="number" name="rating" placeholder="0-5" min="1" max="5" />
           <input type="hidden" name="total_ratings" value="<%= ratings.total_ratings %>" />
           <input type="hidden" name="total_votes" value="<%= ratings.total_votes %>" />
           <input type="hidden" name="yelp_id" value="<%= yelp_id %>" />
@@ -36,7 +36,6 @@
           <input type="hidden" name="lat" value="<%= lat %>" />
           <input type="hidden" name="long" value="<%= lng %>" />
           <button type="submit">Add Rating</button>
-          <i class="fas fa-paw"></i>
         </form>
       </div>
 
@@ -51,8 +50,6 @@
             lng: longitude,
           };
 
-          console.log('this is latitude from ')
-          console.log('this is coordinates')
           var map;
           var myOptions = {
             zoom: 10,

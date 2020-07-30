@@ -43,7 +43,6 @@
                             <input type="hidden" name="yelp_id" value="<%=park.yelp_id%>">
                             <input type="hidden" name="lat" value ="<%= park.lat %>">
                             <input type="hidden" name="long" value ="<%= park.long %>">
-                            <!-- <button type="submit">More Details</button> -->
                         </fieldset>
                         </form>
                 </div>
@@ -53,19 +52,10 @@
         <% var query =  searchQuery%>
         <% var park_arr =  JSON.stringify(parkArr)%>
         
-
 <script>
     geocode();
     function geocode(){
 
-        //NOTE: when declaring park arr, we need to stringify the array of objects.
-        //since EJS will escape HTML, it will convert any "" into '&#34'.
-        //when we declare the parkArr below, we want to use UNESCAPED ejs.
-        //This is accomplished by changing the strawberry '=' to a '-'.
-        //see below sites, accessed in order on 7/28/2020 for train of thought:
-        // https://stackoverflow.com/questions/48626581/cannot-access-the-items-of-the-json-array-declared-in-ejs-inside-javascript-scri
-        // https://stackoverflow.com/questions/37121005/when-i-json-stringifyobject-i-get-a-crazy-string-as-a-value
-        // https://stackoverflow.com/questions/16183748/how-to-escape-html-in-node-js-ejs-view/16184093#16184093
         var parkArr = <%- park_arr %>;
         console.log(parkArr);
         var location = '<%= query  %>';
@@ -81,19 +71,12 @@
             console.log('this is coordinates:', responseResults.geometry.location);
             var map; //Your map
 
-            // geocoder = new google.maps.Geocoder();
-            //Default setup
-            // var latlng = new google.maps.LatLng(-34.397, 150.644);
             var myOptions = {
                 zoom: 10,
                 center: coordinates,
             }
-            map = new google.maps.Map(document.getElementById("map"), myOptions);
 
-            //see below video for logic on inserting map markers, around 8 minute mark:
-            //https://www.youtube.com/watch?v=8NUqDc1bQ84
-            //note, the following two functions MUST be declared inside your ajax call even though
-            //callback functions SHOULD work with asnychronous functions.  Existence is agony.
+            map = new google.maps.Map(document.getElementById("map"), myOptions);
 
             for (var park of parkArr){
                 let parkName = park.name;
@@ -121,6 +104,7 @@
         })
     
     }
+
 </script>
     </main>
     <footer>

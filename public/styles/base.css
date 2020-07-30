@@ -6,9 +6,6 @@ body {
   background-size: cover;
   background-color: white;
   font-family: 'Hind Siliguri', sans-serif;
-  /* background-color: gray; */
-  /* background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); */
-  /* background-color: #c7ecee; */
 }
 
 main, footer {
@@ -28,45 +25,10 @@ header {
   z-index: 2;
 }
 
-footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  display: flex;
-  margin: 1 auto;
-  width: 90vw;
-  /* margin: 40px auto 10px; */
-  flex-shrink: 0;
-  color:rgba(0, 0, 0, 0.598);
-}
-
 nav {
   padding: 1rem 0rem;
 }
 
-ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-left: 1rem;
-}
-
-a {
-  color: rgb(0, 0, 0);
-  font-size: 1rem;
-}
-
-b {
-  font-family: 'Hind Siliguri', sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
-}
-p {
-  font-size: .8rem;
-}
-li a img {
-  padding-right: .5rem;
-}
 h1 {
   font-family: 'Hind Siliguri', sans-serif;;
   text-align: center;
@@ -95,56 +57,66 @@ h4 {
   color: black;
   margin-top: auto;
 }
-
-themes {
-  background-color: #33d9b2;
-  background-color: #ff793f;
-  background-color: #f7f1e3;
-  background-color: #aaa69d;
-  background-color: #4E342E;
-}
-
-.about-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  /* grid-gap: 1rem; */
-  margin: 1rem auto;
-  padding-top: 1rem
-}
-
-
-.team-member-card {
+ul {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /* justify-self: center; */
-  text-align: center;
-  background-color: #80cbc3b3;
-  width: 18rem;
-  height: 18rem;
-  font-size: .5em;
-  /* margin-top: 1rem; */
-  margin: .5rem;
-  padding-bottom: .25rem;
-  font-size: 1.5rem;
-  margin: .5rem auto
-  /* border-radius: 0px 0px 1px 1px; */
-  /* overflow:scroll; */
+  margin-left: 1rem;
+}
+
+li a img {
+  padding-right: .5rem;
+}
+
+a {
+  color: rgb(0, 0, 0);
+  font-size: .9rem;
+  text-decoration:none;
+}
+
+b {
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+}
+p {
+  font-size: .8rem;
+}
+
+i {
+  padding: 0rem .18rem;
+  color: #e99a1a;
 }
 
 article {
   display: flex;
   flex-direction: column;
-}
-.team-member-card img {
-  width: 100px;
-  max-height: 100px;
-  margin: 0 auto;
-  /* border-radius: 1px 1px 0px 0px; */
+  padding-top: .75rem;
 }
 
-.team-info {
-  display: inline-block
+button {
+  border-radius: 44px 44px 44px 44px;
+  height: 1.75rem;
+  font-family: 'Hind Siliguri', sans-serif;
+  background-color: rgba(255, 255, 255, 0.68);
 }
 
+button:hover {
+	background-color:#dcf1ee8e;
+} 
 
+button:active {
+	position:relative;
+	top:1px;
+} 
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  display: flex;
+  margin: 1 auto;
+  width: 90vw;
+  flex-shrink: 0;
+  color:rgba(0, 0, 0, 0.598);
+}
