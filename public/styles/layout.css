@@ -1,5 +1,4 @@
 /* index search container */
-
 .search-container {
   margin-top: 70px;
   display: flex;
@@ -7,11 +6,9 @@
   justify-content: center;
   width: 50%;
   text-align: center;
-  /* background-color: rgba(240, 255, 255, 0.365); */
   margin: 15rem auto;
   padding: 1.5rem;
 }
-
 
 fieldset input {
   border-radius: 44px 44px 44px 44px;
@@ -27,7 +24,6 @@ fieldset input {
 }
 
 /* Results page */
-
 .results-search-container {
   padding-top: 2rem;
 }
@@ -53,8 +49,6 @@ fieldset input {
   margin: .5rem;
   padding-bottom: -2rem;
   font-size: 1.5rem;
-  /* border-radius: 0px 0px 1px 1px; */
-  /* overflow:scroll; */
 }
 
 .result-card img {
@@ -84,16 +78,16 @@ fieldset input {
   margin-left: .5rem;
   margin-right: .18rem;
 }
+
 /* details page business section */
 .rate-it-container {
   margin-top: 70px;
   display: flex;
   align-items: center;
-  /* flex-direction: row; */
   justify-content: center;
   width: 20rem;
-  /* text-align: center; */
   background-color: rgba(240, 255, 255, 0.365);
+  color: rgba(128, 128, 128, 0.831);
   margin: 0 auto;
   padding: .5rem;
 }
@@ -138,7 +132,6 @@ fieldset input {
 .about-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  /* grid-gap: 1rem; */
   margin: 1rem auto;
   padding-top: 0rem
 }
@@ -148,12 +141,10 @@ fieldset input {
   flex-direction: row;
   justify-content: center;
   width: 22rem;
-
   font-size: .5em;
   padding-bottom: .25rem;
   padding-left: 1rem;
   font-size: 2rem;
-  /* margin: 1rem */
 }
 
 .about-h1 {
@@ -169,7 +160,6 @@ fieldset input {
   text-align: left;
   font-style: italic;
   margin-bottom: -.25rem;
-  
 }
 
 .team-member-card img {
@@ -180,8 +170,6 @@ fieldset input {
   margin: 0 auto;
   margin-right: 1rem;
   margin-bottom: .25rem;
-  /* margin: 1rem auto; */
-  /* border-radius: 1px 1px 0px 0px; */
 }
 
 .team-info {
@@ -190,12 +178,4 @@ line-height: 1rem;
 text-align: left;
 margin-right: 1rem;
 color: rgba(0, 0, 0, 0.653);
-}
-
-themes {
-  background-color: #33d9b2;
-  background-color: #ff793f;
-  background-color: #f7f1e3;
-  background-color: #aaa69d;
-  background-color: #4E342E;
 }

@@ -71,7 +71,6 @@ function renderResults(req, res) {
 }
 
 function renderDetail(req, res) {
-  console.log('this is req.body from line 74+++++++++', req.body);
   let SQL = `SELECT * FROM parks_table WHERE yelp_id=$1`;
   let values = [req.body.yelp_id];
   client
@@ -109,9 +108,7 @@ function addRatings(req, res) {
   client
     .query(SQL, params)
     .then(results => {
-      console.log('ratings have been added to database', results.rows);
       helpRenderDetails(req, res, results);
-      // res.status(200);
     })
     .catch(error => handleError(error, res));
 }
@@ -120,7 +117,6 @@ function addRatings(req, res) {
 function helpRenderDetails(req, res, psqlResults) {
   makeMultipleAPIcalls(req.body.address).then(APIresult => {
     let average = psqlResults.rows[0].total_ratings / psqlResults.rows[0].total_votes || 0;
-    console.log('this is req.body.lat from 123+++++++++', req.body.lat);
     res.status(200).render('pages/details', {
       lat: req.body.lat,
       lng: req.body.long,
@@ -241,7 +237,6 @@ function handleNotFound(req, res) {
   res.status(404).send('Could Not Find What You Asked For');
 }
 
-// 500 (catastrophic) error handler. Log it, and then tell the user
 function handleError(error, res) {
   console.error(error);
   res.status(500).render('error', { error_data: error });
