@@ -74,9 +74,12 @@ fieldset input {
 }
 
 .rating-input {
-  width: 4rem;
+  width: 1.65rem;
   margin-left: .5rem;
   margin-right: .18rem;
+  text-align: center;
+  border-radius: 15px 15px 15px 15px;
+  background-color: rgba(128, 128, 128, 0.091);
 }
 
 /* details page business section */
@@ -86,7 +89,7 @@ fieldset input {
   align-items: center;
   justify-content: center;
   width: 20rem;
-  background-color: rgba(240, 255, 255, 0.365);
+  background-color: rgba(240, 255, 255, 0.105);
   color: rgba(128, 128, 128, 0.831);
   margin: 0 auto;
   padding: .5rem;
@@ -141,6 +144,7 @@ fieldset input {
   flex-direction: row;
   justify-content: center;
   width: 22rem;
+  margin-left: 1rem;
   font-size: .5em;
   padding-bottom: .25rem;
   padding-left: 1rem;
