@@ -6,7 +6,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0kg3D3tRoFiFU7V5h8BWaHlEPY1oGyUU&callback=initMap&libraries=&v=weekly" defer></script>
   </head>
 
-  <body style="background-image: url('images/fadedPark.png');">
+  <body>
     <header>
       <%- include ( '../layout/header' ) %>
     </header>
@@ -16,14 +16,15 @@
           <div id="map"></div>
         </span>
       </div>
-
+      
       <div class="details-top">
-        <img src="<%= image_url%>" width="200px" />
-        <h2><%= name %></h2>
+        <h2><b>Details for:</b> <%= name %></h2>
+        <img src="<%= image_url%>" />
         <p><%= address %></p>
       </div>
-
+      
       <div class="rate-it-container">
+        <p> <%= average1 %></p>
         <form method="post" action="/add-ratings">
           <input type="number" name="rating" placeholder="0-5" min="1" max="5" />
           <input type="hidden" name="total_ratings" value="<%= ratings.total_ratings %>" />
@@ -32,7 +33,7 @@
           <input type="hidden" name="image_url" value="<%= image_url %>" />
           <input type="hidden" name="name" value="<%= name %>" />
           <input type="hidden" name="address" value="<%= address %>" />
-          <button type="submit">Rate it</button>
+          <button type="submit">Add Rating</button>
           <i class="fas fa-paw"></i>
         </form>
       </div>

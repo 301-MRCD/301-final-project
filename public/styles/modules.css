@@ -22,10 +22,28 @@
   display: none;
 }
 
+
+
+
+button:hover {
+	background-color:#5cbf2a;
+}
+button:active {
+	position:relative;
+	top:1px;
+}
+
+
+#result-map {
+  padding-top: 0rem;
+}
+.map-container {
+  padding-top: 3.5rem;
+}
 #map {
   /* Always set the map height explicitly to define the size of the div
   * element that contains the map. */
   height: 40vh;
-  width: 80vw;
-  margin: 2rem auto;
+  width: 21.75rem;
+  margin: -2rem auto 2rem;
 }
