@@ -56,7 +56,7 @@ function renderResults(req, res) {
     categories: 'dog_parks',
     sort_by: 'distance',
     location: searchQuery,
-    limit: 10,
+    limit: 12,
   };
 
   superagent
@@ -125,7 +125,7 @@ function helpRenderDetails(req, res, psqlResults) {
       lat: req.body.lat,
       lng: req.body.long,
       ratings: psqlResults.rows[0],
-      average1: average,
+      average1: average.toFixed(1),
       image_url: req.body.image_url,
       name: req.body.name,
       address: req.body.address,
