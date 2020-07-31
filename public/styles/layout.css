@@ -65,6 +65,7 @@ fieldset input {
 }
 
 .details-top img {
+  margin-top: 1rem;
   width: 18rem;
   max-height: 18rem;
 }
@@ -146,7 +147,7 @@ fieldset input {
   width: 22rem;
   margin-left: 1rem;
   font-size: .5em;
-  padding-bottom: .25rem;
+  padding-bottom: .5rem;
   padding-left: 1rem;
   font-size: 2rem;
 }
@@ -160,10 +161,10 @@ fieldset input {
 .about-h2 {
   font-size: 1.6rem;
   font-weight: normal;
-  margin-bottom: 0rem;
+  margin-bottom: -.5rem;
   text-align: left;
-  font-style: italic;
-  margin-bottom: -.25rem;
+  padding-bottom: -.5rem;
+  padding-right: .8rem;
 }
 
 .team-member-card img {
@@ -182,4 +183,15 @@ line-height: 1rem;
 text-align: left;
 margin-right: 1rem;
 color: rgba(0, 0, 0, 0.653);
+}
+
+.social-media {
+  display: flex;
+  text-align: left;
+  margin-bottom: .5rem;
+  align-items: center;
+}
+
+ a i {
+ color:  #2ac09d;
 }
