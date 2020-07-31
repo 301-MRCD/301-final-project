@@ -46,9 +46,10 @@ h2 {
 
 h3 {
   font-family: 'Hind Siliguri', sans-serif;;
-  font-size: 1rem;
+  font-size: 1.1rem;
   padding-top: .5rem;
   padding-bottom: -2rem;
+  color: black;
 }
 
 h4 {
@@ -69,7 +70,7 @@ li a img {
 }
 
 a {
-  color: rgb(0, 0, 0);
+  color: #06755b;;
   font-size: .9rem;
   text-decoration:none;
 }
@@ -77,8 +78,10 @@ a {
 b {
   font-family: 'Hind Siliguri', sans-serif;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  
 }
+
 p {
   font-size: .8rem;
 }
